@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOP TPS3R Elektronik — Pengelola</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<style>
+:root {
+  --forest: #1A3D2B; --leaf: #2D6A4F; --moss: #40916C;
+  --sage: #74C69D; --mist: #D8F3DC; --cream: #F8F5EF;
+  --gold: #C9A84C; --goldL: #F5E6C0;
+  --ink: #1C2B1E; --gray: #6B7F6E; --grayL: #E8EDE9;
+  --white: #FFFFFF; --bg: #F2F5F2;
+  --r: 16px; --rSm: 10px;
+  --sh: 0 2px 16px rgba(26,61,43,.08);
+  --shLg: 0 8px 32px rgba(26,61,43,.14);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+/* ── TOPBAR ── */
+#topbar {
+  background: var(--forest); height: 58px;
+  padding: 0 28px; position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; gap: 14px;
+  box-shadow: 0 2px 20px rgba(0,0,0,.2);
+}
+.t-logo { display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; }
+.t-ring { width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.t-name { font-family: 'Fraunces', serif; font-weight: 600; color: var(--cream); font-size: 15px; }
+.t-sub  { font-size: 10px; color: rgba(116,198,157,.55); font-family: 'DM Mono', monospace; letter-spacing: .05em; }
+.t-sp   { flex: 1; }
+.t-user { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 24px; padding: 5px 14px; color: var(--sage); font-size: 12px; font-weight: 500; }
+.t-btn  { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); color: var(--cream); border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 12px; font-family: 'DM Sans', sans-serif; font-weight: 500; transition: background .2s; }
+.t-btn:hover { background: rgba(255,255,255,.2); }
+.t-btn.gold-btn { background: rgba(201,168,76,.2); border-color: rgba(201,168,76,.4); color: var(--gold); }
+.t-btn.gold-btn:hover { background: rgba(201,168,76,.3); }
+
+/* ── MAIN ── */
+#main { max-width: 1200px; margin: 0 auto; padding: 40px 28px; }
+
+/* ── HERO BANNER ── */
+.hero {
+  background: linear-gradient(135deg, var(--forest) 0%, var(--leaf) 100%);
+  border-radius: var(--r); padding: 36px 40px;
+  margin-bottom: 36px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ''; position: absolute;
+  right: -40px; top: -40px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(201,168,76,.08);
+}
+.hero-eye { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em; color: var(--sage); text-transform: uppercase; margin-bottom: 10px; }
+.hero h2 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
+.hero p  { font-size: 13px; color: rgba(216,243,220,.6); max-width: 520px; line-height: 1.7; }
+.hero-tag { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; background: rgba(201,168,76,.2); border: 1px solid rgba(201,168,76,.4); color: var(--gold); border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; }
+
+/* ── SECTION TITLE ── */
+.sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+.sec-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 400; color: var(--ink); }
+.sec-line  { flex: 1; height: 1px; background: var(--grayL); }
+
+/* ── SOP GRID ── */
+.sop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 48px; }
+.sop-card {
+  background: var(--white); border: 1px solid var(--grayL);
+  border-radius: var(--r); padding: 22px;
+  cursor: pointer; transition: all .25s;
+  box-shadow: var(--sh); display: flex; flex-direction: column; gap: 10px;
+  position: relative; overflow: hidden;
+}
+.sop-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: attr(data-warna);
+  transition: width .25s;
+}
+.sop-card:hover { transform: translateY(-3px); box-shadow: var(--shLg); border-color: transparent; }
+.sop-card .sc-bar { width: 4px; height: 100%; position: absolute; top: 0; left: 0; border-radius: var(--r) 0 0 var(--r); }
+.sop-card .sc-top { display: flex; align-items: flex-start; gap: 12px; padding-left: 10px; }
+.sop-card .sc-ico { font-size: 24px; flex-shrink: 0; }
+.sop-card .sc-label { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+.sop-card .sc-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.sop-card .sc-desc { font-size: 12px; color: var(--gray); line-height: 1.6; padding-left: 10px; flex: 1; }
+.sop-card .sc-foot { display: flex; align-items: center; justify-content: space-between; padding-left: 10px; margin-top: auto; }
+.sop-card .sc-read { font-size: 12px; font-weight: 600; color: var(--moss); }
+.sop-card .sc-arr  { color: var(--sage); font-size: 18px; transition: transform .2s; }
+.sop-card:hover .sc-arr { transform: translateX(4px); }
+
+/* ── MODAL VIEWER ── */
+#modal {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(26,61,43,.6);
+  backdrop-filter: blur(6px);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+#modal.open { display: flex; }
+.modal-box {
+  background: var(--white); border-radius: var(--r);
+  width: 100%; max-width: 960px;
+  height: 90vh; display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,.3);
+  animation: mIn .3s ease;
+}
+@keyframes mIn { from { opacity:0; transform: scale(.96) translateY(12px); } to { opacity:1; transform: none; } }
+.modal-header {
+  padding: 18px 24px; border-bottom: 1px solid var(--grayL);
+  display: flex; align-items: center; gap: 14px;
+}
+.modal-header .mh-ico { font-size: 20px; }
+.modal-header .mh-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--gray); text-transform: uppercase; }
+.modal-header .mh-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+.modal-header .mh-sp  { flex: 1; }
+.modal-actions { display: flex; align-items: center; gap: 10px; }
+.btn-revisi {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--forest); color: var(--cream);
+  border: none; border-radius: 8px;
+  padding: 8px 16px; cursor: pointer;
+  font-size: 13px; font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+}
+.btn-revisi:hover { background: var(--leaf); transform: translateY(-1px); }
+.btn-close {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--grayL); background: var(--bg);
+  cursor: pointer; font-size: 18px; color: var(--gray);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.btn-close:hover { background: var(--grayL); color: var(--ink); }
+.modal-body { flex: 1; overflow: hidden; }
+.modal-body iframe { width: 100%; height: 100%; border: none; border-radius: 0 0 var(--r) var(--r); }
+.modal-loading {
+  height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px; color: var(--gray);
+}
+.modal-loading .spin2 {
+  width: 36px; height: 36px; border: 3px solid var(--grayL);
+  border-top-color: var(--moss); border-radius: 50%;
+  animation: sp2 .8s linear infinite;
+}
+@keyframes sp2 { to { transform: rotate(360deg); } }
+
+/* ── REVISI KONFIRMASI ── */
+#revisiModal {
+  position: fixed; inset: 0; z-index: 600;
+  background: rgba(26,61,43,.65); backdrop-filter: blur(6px);
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+#revisiModal.open { display: flex; }
+.rm-box {
+  background: var(--white); border-radius: var(--r);
+  width: 100%; max-width: 460px; padding: 32px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.3);
+  animation: mIn .3s ease;
+}
+.rm-icon { font-size: 40px; margin-bottom: 16px; }
+.rm-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
+.rm-body  { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 24px; }
+.rm-sop   { background: var(--mist); border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; font-size: 13px; color: var(--forest); font-weight: 600; border-left: 3px solid var(--moss); }
+.rm-info  { background: var(--goldL); border-radius: 8px; padding: 12px 14px; margin-bottom: 24px; font-size: 12px; color: #6B4A00; line-height: 1.6; }
+.rm-btns  { display: flex; gap: 10px; }
+.rm-cancel {
+  flex: 1; padding: 11px; border: 1.5px solid var(--grayL);
+  background: none; border-radius: 8px; cursor: pointer;
+  font-size: 13px; font-weight: 600; color: var(--gray);
+  font-family: 'DM Sans', sans-serif; transition: all .2s;
+}
+.rm-cancel:hover { border-color: var(--moss); color: var(--leaf); }
+.rm-confirm {
+  flex: 2; padding: 11px;
+  background: var(--forest); color: var(--cream);
+  border: none; border-radius: 8px; cursor: pointer;
+  font-size: 13px; font-weight: 600;
+  font-family: 'DM Sans', sans-serif; transition: all .2s;
+}
+.rm-confirm:hover { background: var(--leaf); }
+
+/* ── RIWAYAT ── */
+.riwayat-section { margin-top: 8px; }
+.rv-card {
+  background: var(--white); border: 1px solid var(--grayL);
+  border-radius: var(--r); padding: 18px 22px;
+  margin-bottom: 12px; box-shadow: var(--sh);
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.rv-ico  { font-size: 22px; flex-shrink: 0; }
+.rv-kode { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--moss); margin-bottom: 3px; }
+.rv-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.rv-meta { font-size: 12px; color: var(--gray); }
+.rv-sp   { flex: 1; }
+.rv-bdg  { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.bdg-m   { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
+.bdg-s   { background: var(--mist); color: var(--forest); border: 1px solid var(--sage); }
+.bdg-t   { background: #FFEBEE; color: #C62828; border: 1px solid #FFCDD2; }
+
+.empty { text-align: center; padding: 40px; color: var(--gray); }
+.empty .ei { font-size: 36px; margin-bottom: 8px; }
+
+@media (max-width: 768px) {
+  #main { padding: 20px 16px; }
+  .hero { padding: 24px 20px; }
+  .sop-grid { grid-template-columns: 1fr; }
+  .modal-box { height: 95vh; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <a class="t-logo" href="index.html">
+    <div class="t-ring">♻</div>
+    <div>
+      <div class="t-name">SOP TPS3R Elektronik</div>
+      <div class="t-sub">DINAS PRKCK · JAWA TIMUR</div>
+    </div>
+  </a>
+  <div class="t-sp"></div>
+  <div class="t-user" id="userBadge">🌿 —</div>
+  <button class="t-btn" onclick="doLogout()">Keluar</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eye">Portal Pengelola & Petugas TPS3R</div>
+    <h2>Standar Operasional Prosedur</h2>
+    <p>Pilih dokumen SOP di bawah untuk membuka dan membacanya langsung di browser. Jika ada prosedur yang perlu diperbarui, gunakan tombol <strong style="color:var(--gold)">Ajukan Revisi</strong> untuk mengirimkan usulan ke Dinas.</p>
+    <div class="hero-tag">♻ Dinas PRKCK Provinsi Jawa Timur · Seksi Persampahan</div>
+  </div>
+
+  <!-- SOP LIST -->
+  <div class="sec-head">
+    <div class="sec-title">Dokumen SOP Tersedia</div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="sop-grid" id="sopGrid"></div>
+
+  <!-- RIWAYAT REVISI -->
+  <div class="sec-head riwayat-section">
+    <div class="sec-title">Riwayat Pengajuan Revisi Saya</div>
+    <div class="sec-line"></div>
+  </div>
+  <div id="riwayatList"></div>
+
+</div>
+
+<!-- MODAL VIEWER -->
+<div id="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="mh-ico" id="mIco">📄</div>
+      <div>
+        <div class="mh-label" id="mLabel">—</div>
+        <div class="mh-title" id="mTitle">—</div>
+      </div>
+      <div class="mh-sp"></div>
+      <div class="modal-actions">
+        <button class="btn-revisi" onclick="bukaRevisiModal()">✏️ Ajukan Revisi</button>
+        <button class="btn-close" onclick="tutupModal()">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-loading" id="modalLoading">
+        <div class="spin2"></div>
+        <span>Memuat dokumen…</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL KONFIRMASI REVISI -->
+<div id="revisiModal">
+  <div class="rm-box">
+    <div class="rm-icon">✏️</div>
+    <div class="rm-title">Ajukan Revisi SOP</div>
+    <div class="rm-body">Anda akan membuka dokumen SOP berikut di Google Docs untuk diedit:</div>
+    <div class="rm-sop" id="rmSopName">—</div>
+    <div class="rm-info">
+      📌 <strong>Petunjuk:</strong><br>
+      1. Dokumen akan terbuka di Google Docs dalam tab baru.<br>
+      2. Lakukan perubahan yang Anda usulkan langsung di dokumen.<br>
+      3. Simpan dokumen (Ctrl+S atau otomatis tersimpan).<br>
+      4. Kembali ke halaman ini — pengajuan Anda akan tercatat di riwayat di bawah.
+    </div>
+    <div class="rm-btns">
+      <button class="rm-cancel" onclick="tutupRevisiModal()">Batal</button>
+      <button class="rm-confirm" onclick="lanjutRevisi()">Buka di Google Docs →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── AUTH ────────────────────────────────────────────────────
+const sesi = JSON.parse(sessionStorage.getItem('sop_user') || 'null');
+if (!sesi || sesi.role !== 'tps3r') window.location.href = 'index.html';
+else document.getElementById('userBadge').textContent = '🌿 ' + sesi.nama;
+function doLogout() { sessionStorage.clear(); window.location.href = 'index.html'; }
+
+// ── RIWAYAT (in-memory, shared via sessionStorage) ──────────
+function getRiwayat() {
+  return JSON.parse(sessionStorage.getItem('sop_riwayat') || '[]');
+}
+function simpanRiwayat(r) {
+  sessionStorage.setItem('sop_riwayat', JSON.stringify(r));
+}
+
+// ── RENDER SOP GRID ─────────────────────────────────────────
+const grid = document.getElementById('sopGrid');
+Object.entries(SOP_CONFIG).forEach(([key, sop]) => {
+  const card = document.createElement('div');
+  card.className = 'sop-card';
+  card.innerHTML = `
+    <div class="sc-bar" style="background:${sop.warna}"></div>
+    <div class="sc-top">
+      <div class="sc-ico">${sop.icon}</div>
+      <div>
+        <div class="sc-label" style="color:${sop.warna}">${sop.label}</div>
+        <div class="sc-name">${sop.label.split('—')[1]?.trim() || sop.label}</div>
+      </div>
+    </div>
+    <div class="sc-desc">${sop.deskripsi}</div>
+    <div class="sc-foot">
+      <span class="sc-read">Buka & baca dokumen</span>
+      <span class="sc-arr">→</span>
+    </div>`;
+  card.style.borderLeft = `4px solid ${sop.warna}`;
+  card.onclick = () => bukaModal(key);
+  grid.appendChild(card);
+});
+
+// ── MODAL VIEWER ─────────────────────────────────────────────
+let currentKey = null;
+
+function bukaModal(key) {
+  currentKey = key;
+  const sop = SOP_CONFIG[key];
+  document.getElementById('mIco').textContent   = sop.icon;
+  document.getElementById('mLabel').textContent = sop.label;
+  document.getElementById('mTitle').textContent = sop.label.split('—')[1]?.trim() || sop.label;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <div class="modal-loading">
+      <div class="spin2"></div>
+      <span>Memuat dokumen…</span>
+    </div>`;
+
+  setTimeout(() => {
+    body.innerHTML = `<iframe src="${sop.previewUrl}" title="${sop.label}" allowfullscreen></iframe>`;
+  }, 800);
+}
+
+function tutupModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+  currentKey = null;
+}
+
+// Klik backdrop untuk tutup
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) tutupModal();
+});
+
+// ── MODAL REVISI ─────────────────────────────────────────────
+function bukaRevisiModal() {
+  if (!currentKey) return;
+  const sop = SOP_CONFIG[currentKey];
+  document.getElementById('rmSopName').textContent = sop.label;
+  document.getElementById('revisiModal').classList.add('open');
+}
+
+function tutupRevisiModal() {
+  document.getElementById('revisiModal').classList.remove('open');
+}
+
+function lanjutRevisi() {
+  const sop = SOP_CONFIG[currentKey];
+
+  // Catat ke riwayat
+  const riwayat = getRiwayat();
+  const entri = {
+    id:      'rv_' + Date.now(),
+    key:     currentKey,
+    label:   sop.label,
+    icon:    sop.icon,
+    waktu:   new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }),
+    status:  'menunggu',
+    catatan: null,
+  };
+  riwayat.unshift(entri);
+  simpanRiwayat(riwayat);
+
+  // Buka Google Docs untuk edit
+  window.open(sop.editUrl, '_blank');
+  tutupRevisiModal();
+  tutupModal();
+  renderRiwayat();
+}
+
+// ── RENDER RIWAYAT ───────────────────────────────────────────
+function renderRiwayat() {
+  const el   = document.getElementById('riwayatList');
+  const list = getRiwayat();
+  if (!list.length) {
+    el.innerHTML = `<div class="empty"><div class="ei">📭</div><p>Belum ada pengajuan revisi.</p></div>`;
+    return;
+  }
+  el.innerHTML = list.map(r => `
+    <div class="rv-card">
+      <div class="rv-ico">${r.icon}</div>
+      <div>
+        <div class="rv-kode">${r.key.toUpperCase()}</div>
+        <div class="rv-name">${r.label}</div>
+        <div class="rv-meta">🕐 ${r.waktu}</div>
+        ${r.catatan ? `<div style="margin-top:6px;font-size:12px;color:var(--gray)">💬 ${r.catatan}</div>` : ''}
+      </div>
+      <div class="rv-sp"></div>
+      <span class="rv-bdg ${r.status === 'menunggu' ? 'bdg-m' : r.status === 'disetujui' ? 'bdg-s' : 'bdg-t'}">
+        ${r.status === 'menunggu' ? '⏳ Menunggu Riviu' : r.status === 'disetujui' ? '✅ Disetujui' : '❌ Ditolak'}
+      </span>
+    </div>`).join('');
+}
+
+renderRiwayat();
+</script>
+</body>
+</html>

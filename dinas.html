@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOP TPS3R Elektronik — Staf Dinas</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<style>
+:root {
+  --forest:#1A3D2B;--leaf:#2D6A4F;--moss:#40916C;
+  --sage:#74C69D;--mist:#D8F3DC;--cream:#F8F5EF;
+  --gold:#C9A84C;--goldL:#F5E6C0;
+  --ink:#1C2B1E;--gray:#6B7F6E;--grayL:#E8EDE9;
+  --white:#FFFFFF;--bg:#F2F5F2;
+  --red:#C62828;--redL:#FFEBEE;
+  --r:16px;--rSm:10px;
+  --sh:0 2px 16px rgba(26,61,43,.08);
+  --shLg:0 8px 32px rgba(26,61,43,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+
+/* ── TOPBAR ── */
+#topbar{
+  background:var(--forest);height:58px;
+  padding:0 28px;position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;gap:14px;
+  box-shadow:0 2px 20px rgba(0,0,0,.2);
+}
+.t-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.t-ring{width:34px;height:34px;border-radius:8px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:16px}
+.t-name{font-family:'Fraunces',serif;font-weight:600;color:var(--cream);font-size:15px}
+.t-sub{font-size:10px;color:rgba(116,198,157,.55);font-family:'DM Mono',monospace;letter-spacing:.05em}
+.t-sp{flex:1}
+.t-user{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:5px 14px;color:var(--sage);font-size:12px;font-weight:500}
+.t-notif{position:relative}
+.notif-badge{position:absolute;top:-6px;right:-6px;background:#E53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:none;align-items:center;justify-content:center}
+.t-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:var(--cream);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;transition:background .2s}
+.t-btn:hover{background:rgba(255,255,255,.2)}
+
+/* ── MAIN ── */
+#main{max-width:1300px;margin:0 auto;padding:36px 28px}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,var(--forest) 0%,#0D2B1E 100%);
+  border-radius:var(--r);padding:32px 40px;
+  margin-bottom:32px;position:relative;overflow:hidden;
+  display:flex;align-items:center;gap:32px;
+}
+.hero::after{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(201,168,76,.07)}
+.hero-left{flex:1}
+.hero-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--sage);text-transform:uppercase;margin-bottom:8px}
+.hero h2{font-family:'Fraunces',serif;font-size:24px;font-weight:400;color:var(--cream);margin-bottom:6px}
+.hero p{font-size:13px;color:rgba(216,243,220,.55);line-height:1.6;max-width:480px}
+.hero-stats{display:flex;gap:24px;flex-shrink:0}
+.hs{text-align:center}
+.hs-num{font-family:'Fraunces',serif;font-size:36px;font-weight:300;color:var(--gold);line-height:1}
+.hs-lbl{font-size:11px;color:rgba(116,198,157,.6);margin-top:4px}
+
+/* ── FILTER ROW ── */
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.chip{padding:6px 14px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;border:1.5px solid var(--grayL);background:var(--white);color:var(--gray);transition:all .15s}
+.chip:hover{border-color:var(--moss);color:var(--leaf)}
+.chip.on{background:var(--forest);color:var(--cream);border-color:var(--forest)}
+.filter-cnt{margin-left:auto;font-family:'DM Mono',monospace;font-size:12px;color:var(--gray)}
+
+/* ── REVISI CARDS ── */
+.rv-card{
+  background:var(--white);border:1px solid var(--grayL);
+  border-radius:var(--r);margin-bottom:14px;
+  box-shadow:var(--sh);overflow:hidden;transition:box-shadow .2s;
+}
+.rv-card:hover{box-shadow:var(--shLg)}
+.rv-head{
+  padding:16px 22px;display:flex;align-items:flex-start;
+  justify-content:space-between;gap:14px;cursor:pointer;
+  transition:background .15s;
+}
+.rv-head:hover{background:var(--bg)}
+.rv-ico{font-size:22px;flex-shrink:0;margin-top:2px}
+.rv-info{flex:1;min-width:0}
+.rv-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--moss);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.rv-name{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.rv-meta{font-size:12px;color:var(--gray);display:flex;gap:14px;flex-wrap:wrap}
+.rv-meta span{display:flex;align-items:center;gap:4px}
+.rv-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.bdg{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.bdg-m{background:#FFF3E0;color:#E65100;border:1px solid #FFCC80}
+.bdg-s{background:var(--mist);color:var(--forest);border:1px solid var(--sage)}
+.bdg-t{background:var(--redL);color:var(--red);border:1px solid #FFCDD2}
+.rv-toggle{color:var(--gray);font-size:18px;transition:transform .2s}
+.rv-toggle.open{transform:rotate(180deg)}
+
+/* ── DETAIL PANEL ── */
+.rv-detail{display:none;border-top:1px solid var(--grayL)}
+.rv-detail.open{display:block}
+
+/* ── SPLIT VIEW ── */
+.split-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--grayL);
+}
+.split-label{
+  padding:12px 22px;font-size:11px;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.split-label.old{background:#FFF9F9;color:var(--red);border-right:1px solid var(--grayL)}
+.split-label.new{background:#F6FFF6;color:var(--forest)}
+.split-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.split-dot.red{background:var(--red)}
+.split-dot.grn{background:var(--moss)}
+
+.split-body{display:grid;grid-template-columns:1fr 1fr;height:360px}
+.split-pane{overflow:hidden}
+.split-pane iframe{width:100%;height:100%;border:none}
+.split-pane.old{border-right:1px solid var(--grayL)}
+.split-loading{
+  height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;color:var(--gray);font-size:13px;
+}
+.spin2{width:28px;height:28px;border:3px solid var(--grayL);border-top-color:var(--moss);border-radius:50%;animation:sp2 .8s linear infinite}
+@keyframes sp2{to{transform:rotate(360deg)}}
+
+/* ── REVIEW FORM ── */
+.review-area{padding:20px 22px;border-top:1px solid var(--grayL);background:var(--bg)}
+.review-area .ra-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:12px}
+.ra-textarea{
+  width:100%;padding:12px 14px;border:1.5px solid var(--grayL);
+  border-radius:var(--rSm);font-size:13px;font-family:'DM Sans',sans-serif;
+  background:var(--white);color:var(--ink);resize:vertical;min-height:72px;
+  outline:none;transition:border-color .2s;
+}
+.ra-textarea:focus{border-color:var(--moss)}
+.ra-btns{display:flex;gap:10px;margin-top:14px}
+.btn-setuju{
+  padding:10px 22px;background:var(--forest);color:var(--cream);
+  border:none;border-radius:var(--rSm);font-size:13px;font-weight:600;
+  font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;gap:7px;
+}
+.btn-setuju:hover{background:var(--leaf);transform:translateY(-1px)}
+.btn-tolak{
+  padding:10px 22px;background:transparent;color:var(--red);
+  border:1.5px solid #FFCDD2;border-radius:var(--rSm);font-size:13px;font-weight:600;
+  font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;
+}
+.btn-tolak:hover{background:var(--redL)}
+
+/* ── SUDAH DIRIVIU ── */
+.already-rev{
+  padding:16px 22px;background:var(--bg);border-top:1px solid var(--grayL);
+  font-size:13px;color:var(--gray);display:flex;align-items:flex-start;gap:10px;
+}
+.already-rev strong{color:var(--ink)}
+
+/* ── DISETUJUI BANNER ── */
+.approved-banner{
+  margin:0 22px 16px;padding:14px 16px;
+  background:var(--mist);border-radius:var(--rSm);
+  border-left:4px solid var(--moss);
+  font-size:13px;color:var(--forest);line-height:1.6;
+}
+.approved-banner strong{display:block;font-size:14px;margin-bottom:4px}
+
+.empty{text-align:center;padding:60px;color:var(--gray)}
+.empty .ei{font-size:40px;margin-bottom:10px}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  padding:14px 20px;border-radius:var(--rSm);font-size:13px;font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);display:none;
+  animation:ti .3s ease;
+}
+.toast.ok{background:var(--forest);color:var(--cream)}
+.toast.err{background:var(--red);color:#fff}
+@keyframes ti{from{transform:translateX(80px);opacity:0}to{transform:none;opacity:1}}
+
+@media(max-width:768px){
+  #main{padding:16px}
+  .hero{flex-direction:column;gap:20px;padding:24px 20px}
+  .hero-stats{justify-content:center}
+  .split-header,.split-body{grid-template-columns:1fr}
+  .split-pane.old{border-right:none;border-bottom:1px solid var(--grayL)}
+  .split-body{height:600px}
+  .split-label.old{border-right:none;border-bottom:1px solid var(--grayL)}
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <a class="t-logo" href="index.html">
+    <div class="t-ring">♻</div>
+    <div>
+      <div class="t-name">SOP TPS3R Elektronik</div>
+      <div class="t-sub">DINAS PRKCK · JAWA TIMUR</div>
+    </div>
+  </a>
+  <div class="t-sp"></div>
+  <div class="t-user" id="userBadge">🏛️ —</div>
+  <button class="t-btn" onclick="doLogout()">Keluar</button>
+</div>
+
+<div id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eye">Portal Staf Dinas PRKCK Jawa Timur</div>
+      <h2>Inbox Pengajuan Revisi SOP</h2>
+      <p>Tinjau usulan perubahan SOP dari pengelola dan petugas TPS3R. Bandingkan dokumen asli dengan revisi yang diajukan, lalu setujui atau tolak.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hs">
+        <div class="hs-num" id="stTotal">0</div>
+        <div class="hs-lbl">Total</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num" id="stMenunggu" style="color:#F5A623">0</div>
+        <div class="hs-lbl">Menunggu</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num" id="stSelesai">0</div>
+        <div class="hs-lbl">Selesai</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-row">
+    <div class="chip on" onclick="setFilter('semua',this)">Semua</div>
+    <div class="chip" onclick="setFilter('menunggu',this)">⏳ Menunggu Riviu</div>
+    <div class="chip" onclick="setFilter('disetujui',this)">✅ Disetujui</div>
+    <div class="chip" onclick="setFilter('ditolak',this)">❌ Ditolak</div>
+    <span class="filter-cnt" id="filterCnt"></span>
+  </div>
+
+  <!-- LIST -->
+  <div id="revisiList"></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── AUTH ─────────────────────────────────────────────────────
+const sesi = JSON.parse(sessionStorage.getItem('sop_user') || 'null');
+if (!sesi || sesi.role !== 'dinas') window.location.href = 'index.html';
+else document.getElementById('userBadge').textContent = '🏛️ ' + sesi.nama;
+function doLogout() { sessionStorage.clear(); window.location.href = 'index.html'; }
+
+// ── DATA ─────────────────────────────────────────────────────
+function getData() {
+  return JSON.parse(sessionStorage.getItem('sop_riwayat') || '[]');
+}
+function saveData(d) {
+  sessionStorage.setItem('sop_riwayat', JSON.stringify(d));
+}
+
+// ── STATE ─────────────────────────────────────────────────────
+let filterStatus = 'semua';
+let openId = null;
+let iframesLoaded = {};
+
+// ── STATS ─────────────────────────────────────────────────────
+function updateStats() {
+  const all = getData();
+  document.getElementById('stTotal').textContent    = all.length;
+  document.getElementById('stMenunggu').textContent = all.filter(r => r.status === 'menunggu').length;
+  document.getElementById('stSelesai').textContent  = all.filter(r => r.status !== 'menunggu').length;
+}
+
+// ── FILTER ───────────────────────────────────────────────────
+function setFilter(f, el) {
+  filterStatus = f;
+  document.querySelectorAll('.filter-row .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  openId = null;
+  iframesLoaded = {};
+  render();
+}
+
+// ── RENDER ───────────────────────────────────────────────────
+function render() {
+  const all = getData();
+  const filtered = filterStatus === 'semua' ? all
+    : all.filter(r => r.status === filterStatus);
+
+  updateStats();
+  document.getElementById('filterCnt').textContent = filtered.length + ' pengajuan';
+
+  const el = document.getElementById('revisiList');
+
+  if (!filtered.length) {
+    el.innerHTML = `<div class="empty">
+      <div class="ei">📭</div>
+      <p>Tidak ada pengajuan revisi${filterStatus !== 'semua' ? ' dengan status ini' : ''}.</p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = filtered.map(r => buildCard(r)).join('');
+}
+
+function buildCard(r) {
+  const isOpen   = openId === r.id;
+  const sop      = SOP_CONFIG[r.key] || {};
+  const bdgClass = r.status === 'menunggu' ? 'bdg-m' : r.status === 'disetujui' ? 'bdg-s' : 'bdg-t';
+  const bdgText  = r.status === 'menunggu' ? '⏳ Menunggu Riviu'
+    : r.status === 'disetujui' ? '✅ Disetujui' : '❌ Ditolak';
+
+  // split preview hanya di-load saat kartu terbuka
+  const splitHtml = isOpen ? buildSplitView(r, sop) : '';
+
+  // panel review / sudah diriviu
+  let actionHtml = '';
+  if (isOpen) {
+    if (r.status === 'menunggu') {
+      actionHtml = `
+        <div class="review-area">
+          <div class="ra-title">Catatan / Komentar untuk Pengelola TPS3R (opsional)</div>
+          <textarea class="ra-textarea" id="cat_${r.id}"
+            placeholder="Tulis alasan persetujuan, catatan perbaikan, atau alasan penolakan..."></textarea>
+          <div class="ra-btns">
+            <button class="btn-setuju" onclick="riviu('${r.id}','disetujui')">✅ Setujui Revisi</button>
+            <button class="btn-tolak"  onclick="riviu('${r.id}','ditolak')">❌ Tolak Revisi</button>
+          </div>
+        </div>`;
+    } else {
+      const icon = r.status === 'disetujui' ? '✅' : '❌';
+      actionHtml = `
+        <div class="already-rev">
+          ${icon} Pengajuan ini telah <strong>${r.status === 'disetujui' ? 'disetujui' : 'ditolak'}</strong>
+          pada ${r.reviewedAt || '—'}.
+          ${r.catatan ? `<br><br>💬 Catatan: <em>${r.catatan}</em>` : ''}
+        </div>`;
+
+      // Approved banner
+      if (r.status === 'disetujui') {
+        actionHtml = `
+          <div class="approved-banner">
+            <strong>✅ Revisi Disetujui</strong>
+            Perubahan pada dokumen <em>${r.label}</em> telah disetujui oleh ${sesi.nama}
+            pada ${r.reviewedAt || '—'}.
+            ${r.catatan ? `Catatan: "${r.catatan}"` : ''}
+          </div>` + actionHtml;
+      }
+    }
+  }
+
+  return `
+    <div class="rv-card" id="card_${r.id}">
+      <div class="rv-head" onclick="toggleCard('${r.id}')">
+        <div class="rv-ico">${r.icon || '📄'}</div>
+        <div class="rv-info">
+          <div class="rv-label">${r.key?.toUpperCase() || '—'}</div>
+          <div class="rv-name">${r.label}</div>
+          <div class="rv-meta">
+            <span>🕐 ${r.waktu}</span>
+            <span>👤 Pengelola TPS3R</span>
+          </div>
+        </div>
+        <div class="rv-right">
+          <span class="bdg ${bdgClass}">${bdgText}</span>
+          <span class="rv-toggle ${isOpen ? 'open' : ''}">▾</span>
+        </div>
+      </div>
+      <div class="rv-detail ${isOpen ? 'open' : ''}">
+        ${splitHtml}
+        ${actionHtml}
+      </div>
+    </div>`;
+}
+
+function buildSplitView(r, sop) {
+  const oldUrl = sop.previewUrl || '';
+  const newUrl = sop.editUrl
+    ? sop.editUrl.replace('/edit', '/preview') + '&rm=minimal'
+    : '';
+
+  // Placeholder keterangan jika URL masih placeholder
+  const isPlaceholder = oldUrl.includes('PLACEHOLDER');
+  const iframeOld = isPlaceholder
+    ? `<div class="split-loading"><div class="spin2"></div><span>URL Google Drive belum dikonfigurasi</span></div>`
+    : `<iframe src="${oldUrl}" title="SOP Asli" allowfullscreen onload="this.previousSibling&&(this.previousSibling.style.display='none')"></iframe>`;
+  const iframeNew = isPlaceholder
+    ? `<div class="split-loading"><div class="spin2"></div><span>URL revisi belum tersedia</span></div>`
+    : `<iframe src="${newUrl}" title="Revisi" allowfullscreen></iframe>`;
+
+  return `
+    <div class="split-header">
+      <div class="split-label old">
+        <span class="split-dot red"></span>
+        Dokumen SOP Asli (Referensi)
+      </div>
+      <div class="split-label new">
+        <span class="split-dot grn"></span>
+        Dokumen Revisi yang Diajukan
+      </div>
+    </div>
+    <div class="split-body">
+      <div class="split-pane old">
+        <div class="split-loading" id="load_old_${r.id}">
+          <div class="spin2"></div><span>Memuat dokumen asli…</span>
+        </div>
+        ${isPlaceholder ? '' : `<iframe src="${oldUrl}" title="SOP Asli" style="width:100%;height:100%;border:none"
+          onload="document.getElementById('load_old_${r.id}').style.display='none'"></iframe>`}
+        ${isPlaceholder ? `<div class="split-loading" style="position:absolute;inset:0;background:#FFF9F9">
+          <span style="font-size:12px;text-align:center;padding:20px;color:#C62828">
+            ⚙️ URL Google Drive belum dikonfigurasi.<br>Ganti PLACEHOLDER di config.js.
+          </span></div>` : ''}
+      </div>
+      <div class="split-pane new" style="position:relative">
+        <div class="split-loading" id="load_new_${r.id}">
+          <div class="spin2"></div><span>Memuat dokumen revisi…</span>
+        </div>
+        ${isPlaceholder ? `<div class="split-loading" style="position:absolute;inset:0;background:#F6FFF6">
+          <span style="font-size:12px;text-align:center;padding:20px;color:var(--forest)">
+            ⚙️ URL revisi belum dikonfigurasi.<br>Setelah URL Google Drive diisi, revisi tampil di sini.
+          </span></div>`
+        : `<iframe src="${newUrl}" title="Revisi" style="width:100%;height:100%;border:none"
+            onload="document.getElementById('load_new_${r.id}').style.display='none'"></iframe>`}
+      </div>
+    </div>`;
+}
+
+// ── TOGGLE CARD ───────────────────────────────────────────────
+function toggleCard(id) {
+  openId = openId === id ? null : id;
+  render();
+  if (openId) {
+    setTimeout(() => {
+      document.getElementById('card_' + id)
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 60);
+  }
+}
+
+// ── RIVIU ─────────────────────────────────────────────────────
+function riviu(id, status) {
+  const catatan = (document.getElementById('cat_' + id)?.value || '').trim();
+  const data    = getData();
+  const idx     = data.findIndex(r => r.id === id);
+  if (idx < 0) return;
+
+  data[idx].status     = status;
+  data[idx].catatan    = catatan || null;
+  data[idx].reviewedAt = new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+  saveData(data);
+
+  openId = null;
+  iframesLoaded = {};
+  showToast(
+    status === 'disetujui' ? '✅ Revisi berhasil disetujui!' : '❌ Revisi ditolak.',
+    'ok'
+  );
+  render();
+}
+
+// ── TOAST ─────────────────────────────────────────────────────
+function showToast(msg, type) {
+  const el = document.getElementById('toast');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  el.style.display = 'flex';
+  setTimeout(() => el.style.display = 'none', 3500);
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+updateStats();
+render();
+
+// Polling setiap 5 detik untuk menangkap pengajuan baru dari tab TPS3R
+setInterval(() => {
+  updateStats();
+  render();
+}, 5000);
+</script>
+</body>
+</html>

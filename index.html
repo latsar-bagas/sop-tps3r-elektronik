@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOP TPS3R Elektronik — Dinas PRKCK Jawa Timur</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest:   #1A3D2B;
+  --leaf:     #2D6A4F;
+  --moss:     #40916C;
+  --sage:     #74C69D;
+  --mist:     #D8F3DC;
+  --cream:    #F8F5EF;
+  --gold:     #C9A84C;
+  --goldL:    #F5E6C0;
+  --ink:      #1C2B1E;
+  --gray:     #6B7F6E;
+  --grayL:    #E8EDE9;
+  --white:    #FFFFFF;
+  --err:      #8B2020;
+  --errL:     #FDEAEA;
+  --r:        16px;
+  --rSm:      10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  height: 100%;
+  background: var(--forest);
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ── PATTERN BG ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(64,145,108,.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(201,168,76,.10) 0%, transparent 40%),
+    radial-gradient(circle at 60% 80%, rgba(45,106,79,.2) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+/* ── LEFT ── */
+.left {
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding: 72px 64px;
+  position: relative; z-index: 1;
+}
+.left-emblem {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 64px;
+}
+.left-emblem .ring {
+  width: 48px; height: 48px; border-radius: 12px;
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  background: rgba(201,168,76,.12);
+}
+.left-emblem .brand {
+  font-family: 'Fraunces', serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--sage); line-height: 1.3;
+}
+.left-emblem .brand span {
+  display: block; font-size: 11px;
+  color: rgba(116,198,157,.55);
+  font-family: 'DM Mono', monospace;
+  font-weight: 400; letter-spacing: .06em;
+}
+
+.left h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300; line-height: 1.15;
+  color: var(--cream); margin-bottom: 20px;
+  max-width: 480px;
+}
+.left h1 em {
+  font-style: italic; color: var(--gold);
+  font-weight: 300;
+}
+.left p {
+  font-size: 15px; line-height: 1.75;
+  color: rgba(216,243,220,.55);
+  max-width: 400px; margin-bottom: 48px;
+}
+.pillars {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.pillar {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13px; color: rgba(116,198,157,.7);
+}
+.pillar-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0;
+}
+
+.left-footer {
+  position: absolute; bottom: 40px; left: 64px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: rgba(116,198,157,.3);
+  letter-spacing: .08em;
+}
+
+/* ── RIGHT ── */
+.right {
+  width: 480px; flex-shrink: 0;
+  background: var(--cream);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 64px 52px;
+  position: relative; z-index: 1;
+}
+.right::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+}
+
+.form-wrap { width: 100%; }
+.form-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: .12em;
+  color: var(--moss); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.form-title {
+  font-family: 'Fraunces', serif;
+  font-size: 32px; font-weight: 400;
+  color: var(--ink); margin-bottom: 8px;
+}
+.form-sub {
+  font-size: 13px; color: var(--gray);
+  margin-bottom: 36px; line-height: 1.6;
+}
+
+/* ROLE SELECTOR */
+.role-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+.role-btn {
+  border: 1.5px solid var(--grayL);
+  border-radius: var(--rSm);
+  padding: 14px 12px;
+  cursor: pointer; transition: all .2s;
+  background: var(--white);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px; text-align: center;
+}
+.role-btn:hover { border-color: var(--moss); }
+.role-btn.on {
+  border-color: var(--leaf);
+  background: rgba(45,106,79,.05);
+  box-shadow: 0 0 0 3px rgba(45,106,79,.1);
+}
+.role-btn .ri { font-size: 22px; }
+.role-btn .rn { font-size: 12px; font-weight: 600; color: var(--ink); }
+.role-btn .rs { font-size: 11px; color: var(--gray); }
+
+/* FIELDS */
+.field { margin-bottom: 18px; }
+.lbl {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: var(--leaf); margin-bottom: 7px;
+}
+.inp {
+  width: 100%; padding: 13px 16px;
+  border: 1.5px solid var(--grayL);
+  border-radius: var(--rSm);
+  font-size: 14px; font-family: 'DM Sans', sans-serif;
+  background: var(--white); color: var(--ink);
+  outline: none; transition: border-color .2s, box-shadow .2s;
+}
+.inp:focus {
+  border-color: var(--leaf);
+  box-shadow: 0 0 0 3px rgba(45,106,79,.1);
+}
+.inp::placeholder { color: #B5BEB6; }
+.pwd-wrap { position: relative; }
+.pwd-eye {
+  position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: var(--gray); font-size: 15px;
+}
+
+/* BUTTON */
+.btn-login {
+  width: 100%; padding: 14px;
+  background: var(--forest);
+  color: var(--cream); border: none;
+  border-radius: var(--rSm);
+  font-size: 14px; font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center;
+  justify-content: center; gap: 8px;
+  letter-spacing: .02em;
+  margin-top: 4px;
+}
+.btn-login:hover {
+  background: var(--leaf);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(26,61,43,.25);
+}
+.btn-login:disabled { opacity: .6; transform: none; cursor: not-allowed; }
+
+/* ALERT */
+.alert {
+  padding: 12px 14px; border-radius: var(--rSm);
+  font-size: 13px; margin-bottom: 16px;
+  display: none; line-height: 1.5;
+}
+.alert.err { background: var(--errL); color: var(--err); border: 1px solid #F5C6C6; display: block; }
+.alert.ok  { background: var(--mist); color: var(--forest); border: 1px solid var(--sage); display: block; }
+
+/* DEMO HINT */
+.demo-hint {
+  margin-top: 28px; padding: 14px 16px;
+  background: var(--mist); border-radius: var(--rSm);
+  border: 1px solid rgba(64,145,108,.2);
+}
+.demo-hint .dh-title {
+  font-size: 11px; font-weight: 600;
+  color: var(--moss); letter-spacing: .05em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.demo-hint .dh-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--gray);
+  margin-bottom: 4px;
+}
+.demo-hint .dh-row:last-child { margin-bottom: 0; }
+.demo-hint code {
+  font-family: 'DM Mono', monospace;
+  background: var(--white); padding: 2px 7px;
+  border-radius: 4px; font-size: 11px;
+  color: var(--forest); border: 1px solid var(--grayL);
+}
+
+/* SPIN */
+.spin {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: #fff; border-radius: 50%;
+  animation: sp .6s linear infinite; display: none;
+}
+@keyframes sp { to { transform: rotate(360deg); } }
+
+@media (max-width: 768px) {
+  body { flex-direction: column; overflow: auto; }
+  .left { padding: 40px 28px; }
+  .left h1 { font-size: 32px; }
+  .left-footer { display: none; }
+  .right { width: 100%; padding: 40px 28px; }
+  .right::before { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- LEFT -->
+<div class="left">
+  <div class="left-emblem">
+    <div class="ring">♻</div>
+    <div class="brand">
+      SOP TPS3R Elektronik
+      <span>DINAS PRKCK · JAWA TIMUR</span>
+    </div>
+  </div>
+
+  <h1>Panduan Operasional<br>TPS3R secara <em>digital</em>,<br>kapan saja.</h1>
+  <p>Akses standar prosedur pengelolaan sampah TPS3R, pantau pembaruan, dan ajukan revisi langsung dari perangkat Anda.</p>
+
+  <div class="pillars">
+    <div class="pillar"><div class="pillar-dot"></div>Baca dan unduh SOP kapan saja</div>
+    <div class="pillar"><div class="pillar-dot"></div>Ajukan revisi langsung via Google Docs</div>
+    <div class="pillar"><div class="pillar-dot"></div>Riviu dan persetujuan oleh Dinas terintegrasi</div>
+    <div class="pillar"><div class="pillar-dot"></div>Riwayat perubahan SOP tercatat otomatis</div>
+  </div>
+
+  <div class="left-footer">SEKSI PERSAMPAHAN · BIDANG AMPLP · © 2025</div>
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+  <div class="form-wrap">
+    <div class="form-eyebrow">Masuk ke sistem</div>
+    <div class="form-title">Selamat datang</div>
+    <div class="form-sub">Pilih peran Anda untuk melanjutkan.</div>
+
+    <div class="role-row">
+      <div class="role-btn on" id="rTPS" onclick="setRole('tps3r')">
+        <div class="ri">🌿</div>
+        <div class="rn">Pengelola / Petugas</div>
+        <div class="rs">TPS3R</div>
+      </div>
+      <div class="role-btn" id="rDinas" onclick="setRole('dinas')">
+        <div class="ri">🏛️</div>
+        <div class="rn">Staf Dinas</div>
+        <div class="rs">PRKCK Jawa Timur</div>
+      </div>
+    </div>
+
+    <div id="alertBox" class="alert"></div>
+
+    <div class="field">
+      <label class="lbl">Username</label>
+      <input class="inp" type="text" id="username" placeholder="Masukkan username" autocomplete="username">
+    </div>
+    <div class="field">
+      <label class="lbl">Kata Sandi</label>
+      <div class="pwd-wrap">
+        <input class="inp" type="password" id="password" placeholder="Masukkan kata sandi"
+          onkeydown="if(event.key==='Enter')doLogin()">
+        <button class="pwd-eye" onclick="togglePwd(this)">👁</button>
+      </div>
+    </div>
+
+    <button class="btn-login" id="btnLogin" onclick="doLogin()">
+      <div class="spin" id="spin"></div>
+      <span id="btnTxt">Masuk ke Sistem</span>
+    </button>
+
+    <div class="demo-hint">
+      <div class="dh-title">Akun untuk simulasi</div>
+      <div class="dh-row">🌿 Pengelola TPS3R &nbsp;→ <code>tps3r</code> / <code>user</code></div>
+      <div class="dh-row">🏛️ Staf Dinas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <code>dinas</code> / <code>admin</code></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const ACCOUNTS = {
+  tps3r: { pwd: 'user',  role: 'tps3r', nama: 'Pengelola TPS3R', page: 'tps3r.html' },
+  dinas: { pwd: 'admin', role: 'dinas', nama: 'Staf Dinas PRKCK', page: 'dinas.html' },
+};
+
+let selectedRole = 'tps3r';
+
+function setRole(r) {
+  selectedRole = r;
+  document.getElementById('rTPS').classList.toggle('on', r === 'tps3r');
+  document.getElementById('rDinas').classList.toggle('on', r === 'dinas');
+}
+
+function togglePwd(btn) {
+  const inp = document.getElementById('password');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+}
+
+function showAlert(msg, type) {
+  const el = document.getElementById('alertBox');
+  el.className = 'alert ' + type;
+  el.textContent = msg;
+}
+
+function setLoading(v) {
+  document.getElementById('btnLogin').disabled = v;
+  document.getElementById('spin').style.display = v ? 'block' : 'none';
+  document.getElementById('btnTxt').textContent = v ? 'Memproses...' : 'Masuk ke Sistem';
+}
+
+function doLogin() {
+  const user = document.getElementById('username').value.trim().toLowerCase();
+  const pwd  = document.getElementById('password').value;
+  if (!user || !pwd) return showAlert('Username dan kata sandi harus diisi.', 'err');
+
+  const acc = ACCOUNTS[user];
+  if (!acc) return showAlert('Username tidak ditemukan.', 'err');
+  if (acc.pwd !== pwd) return showAlert('Kata sandi salah.', 'err');
+  if (acc.role !== selectedRole) return showAlert('Peran yang dipilih tidak sesuai akun ini.', 'err');
+
+  setLoading(true);
+  sessionStorage.setItem('sop_user', JSON.stringify({ username: user, nama: acc.nama, role: acc.role }));
+  setTimeout(() => { window.location.href = acc.page; }, 600);
+}
+
+// Auto-redirect jika sudah login
+const s = sessionStorage.getItem('sop_user');
+if (s) {
+  const u = JSON.parse(s);
+  window.location.href = u.role === 'dinas' ? 'dinas.html' : 'tps3r.html';
+}
+</script>
+</body>
+</html>
