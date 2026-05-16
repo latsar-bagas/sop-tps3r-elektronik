@@ -279,25 +279,7 @@ function showToast(msg,type){const el=document.getElementById('toast');el.classN
 
 updateStats();render();
 
-// Polling cerdas: hanya update stats & daftar jika ada perubahan data
-// Tidak menyentuh kartu yang sedang terbuka (openId)
-let _lastDataHash = '';
-setInterval(()=>{
-  const current = JSON.stringify(getData());
-  if(current === _lastDataHash) return; // tidak ada perubahan, skip
-  _lastDataHash = current;
-  updateStats();
-  // Hanya render ulang jika tidak ada kartu yang sedang dibuka
-  // agar iframe preview tidak ikut reload
-  if(!openId) render();
-  else {
-    // Kalau ada kartu terbuka, hanya update stats dan badge saja
-    const all = getData();
-    document.getElementById('stTotal').textContent = all.length;
-    document.getElementById('stMenunggu').textContent = all.filter(r=>r.status==='menunggu').length;
-    document.getElementById('stSelesai').textContent = all.filter(r=>r.status!=='menunggu').length;
-  }
-}, 3000);
+// Data dimuat sekali saat halaman dibuka — tidak ada auto-refresh.
 </script>
 </body>
 </html>
