@@ -278,7 +278,26 @@ function riviu(id,status){
 function showToast(msg,type){const el=document.getElementById('toast');el.className='toast '+type;el.textContent=msg;el.style.display='flex';setTimeout(()=>el.style.display='none',3500);}
 
 updateStats();render();
-setInterval(()=>{updateStats();render();},5000);
+
+// Polling cerdas: hanya update stats & daftar jika ada perubahan data
+// Tidak menyentuh kartu yang sedang terbuka (openId)
+let _lastDataHash = '';
+setInterval(()=>{
+  const current = JSON.stringify(getData());
+  if(current === _lastDataHash) return; // tidak ada perubahan, skip
+  _lastDataHash = current;
+  updateStats();
+  // Hanya render ulang jika tidak ada kartu yang sedang dibuka
+  // agar iframe preview tidak ikut reload
+  if(!openId) render();
+  else {
+    // Kalau ada kartu terbuka, hanya update stats dan badge saja
+    const all = getData();
+    document.getElementById('stTotal').textContent = all.length;
+    document.getElementById('stMenunggu').textContent = all.filter(r=>r.status==='menunggu').length;
+    document.getElementById('stSelesai').textContent = all.filter(r=>r.status!=='menunggu').length;
+  }
+}, 3000);
 </script>
 </body>
 </html>
