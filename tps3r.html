@@ -7,433 +7,339 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="config.js"></script>
 <style>
-:root {
-  --forest: #1A3D2B; --leaf: #2D6A4F; --moss: #40916C;
-  --sage: #74C69D; --mist: #D8F3DC; --cream: #F8F5EF;
-  --gold: #C9A84C; --goldL: #F5E6C0;
-  --ink: #1C2B1E; --gray: #6B7F6E; --grayL: #E8EDE9;
-  --white: #FFFFFF; --bg: #F2F5F2;
-  --r: 16px; --rSm: 10px;
-  --sh: 0 2px 16px rgba(26,61,43,.08);
-  --shLg: 0 8px 32px rgba(26,61,43,.14);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
-
-/* ── TOPBAR ── */
-#topbar {
-  background: var(--forest); height: 58px;
-  padding: 0 28px; position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center; gap: 14px;
-  box-shadow: 0 2px 20px rgba(0,0,0,.2);
-}
-.t-logo { display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; }
-.t-ring { width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 16px; }
-.t-name { font-family: 'Fraunces', serif; font-weight: 600; color: var(--cream); font-size: 15px; }
-.t-sub  { font-size: 10px; color: rgba(116,198,157,.55); font-family: 'DM Mono', monospace; letter-spacing: .05em; }
-.t-sp   { flex: 1; }
-.t-user { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 24px; padding: 5px 14px; color: var(--sage); font-size: 12px; font-weight: 500; }
-.t-btn  { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); color: var(--cream); border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 12px; font-family: 'DM Sans', sans-serif; font-weight: 500; transition: background .2s; }
-.t-btn:hover { background: rgba(255,255,255,.2); }
-.t-btn.gold-btn { background: rgba(201,168,76,.2); border-color: rgba(201,168,76,.4); color: var(--gold); }
-.t-btn.gold-btn:hover { background: rgba(201,168,76,.3); }
-
-/* ── MAIN ── */
-#main { max-width: 1200px; margin: 0 auto; padding: 40px 28px; }
-
-/* ── HERO BANNER ── */
-.hero {
-  background: linear-gradient(135deg, var(--forest) 0%, var(--leaf) 100%);
-  border-radius: var(--r); padding: 36px 40px;
-  margin-bottom: 36px; position: relative; overflow: hidden;
-}
-.hero::after {
-  content: ''; position: absolute;
-  right: -40px; top: -40px;
-  width: 220px; height: 220px; border-radius: 50%;
-  background: rgba(201,168,76,.08);
-}
-.hero-eye { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em; color: var(--sage); text-transform: uppercase; margin-bottom: 10px; }
-.hero h2 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
-.hero p  { font-size: 13px; color: rgba(216,243,220,.6); max-width: 520px; line-height: 1.7; }
-.hero-tag { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; background: rgba(201,168,76,.2); border: 1px solid rgba(201,168,76,.4); color: var(--gold); border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; }
-
-/* ── SECTION TITLE ── */
-.sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
-.sec-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 400; color: var(--ink); }
-.sec-line  { flex: 1; height: 1px; background: var(--grayL); }
-
-/* ── SOP GRID ── */
-.sop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 48px; }
-.sop-card {
-  background: var(--white); border: 1px solid var(--grayL);
-  border-radius: var(--r); padding: 22px;
-  cursor: pointer; transition: all .25s;
-  box-shadow: var(--sh); display: flex; flex-direction: column; gap: 10px;
-  position: relative; overflow: hidden;
-}
-.sop-card::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 4px; height: 100%;
-  background: attr(data-warna);
-  transition: width .25s;
-}
-.sop-card:hover { transform: translateY(-3px); box-shadow: var(--shLg); border-color: transparent; }
-.sop-card .sc-bar { width: 4px; height: 100%; position: absolute; top: 0; left: 0; border-radius: var(--r) 0 0 var(--r); }
-.sop-card .sc-top { display: flex; align-items: flex-start; gap: 12px; padding-left: 10px; }
-.sop-card .sc-ico { font-size: 24px; flex-shrink: 0; }
-.sop-card .sc-label { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
-.sop-card .sc-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
-.sop-card .sc-desc { font-size: 12px; color: var(--gray); line-height: 1.6; padding-left: 10px; flex: 1; }
-.sop-card .sc-foot { display: flex; align-items: center; justify-content: space-between; padding-left: 10px; margin-top: auto; }
-.sop-card .sc-read { font-size: 12px; font-weight: 600; color: var(--moss); }
-.sop-card .sc-arr  { color: var(--sage); font-size: 18px; transition: transform .2s; }
-.sop-card:hover .sc-arr { transform: translateX(4px); }
-
-/* ── MODAL VIEWER ── */
-#modal {
-  position: fixed; inset: 0; z-index: 500;
-  background: rgba(26,61,43,.6);
-  backdrop-filter: blur(6px);
-  display: none; align-items: center; justify-content: center;
-  padding: 20px;
-}
-#modal.open { display: flex; }
-.modal-box {
-  background: var(--white); border-radius: var(--r);
-  width: 100%; max-width: 960px;
-  height: 90vh; display: flex; flex-direction: column;
-  box-shadow: 0 24px 64px rgba(0,0,0,.3);
-  animation: mIn .3s ease;
-}
-@keyframes mIn { from { opacity:0; transform: scale(.96) translateY(12px); } to { opacity:1; transform: none; } }
-.modal-header {
-  padding: 18px 24px; border-bottom: 1px solid var(--grayL);
-  display: flex; align-items: center; gap: 14px;
-}
-.modal-header .mh-ico { font-size: 20px; }
-.modal-header .mh-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .08em; color: var(--gray); text-transform: uppercase; }
-.modal-header .mh-title { font-size: 15px; font-weight: 600; color: var(--ink); }
-.modal-header .mh-sp  { flex: 1; }
-.modal-actions { display: flex; align-items: center; gap: 10px; }
-.btn-revisi {
-  display: flex; align-items: center; gap: 7px;
-  background: var(--forest); color: var(--cream);
-  border: none; border-radius: 8px;
-  padding: 8px 16px; cursor: pointer;
-  font-size: 13px; font-weight: 600;
-  font-family: 'DM Sans', sans-serif;
-  transition: all .2s;
-}
-.btn-revisi:hover { background: var(--leaf); transform: translateY(-1px); }
-.btn-close {
-  width: 34px; height: 34px; border-radius: 50%;
-  border: 1px solid var(--grayL); background: var(--bg);
-  cursor: pointer; font-size: 18px; color: var(--gray);
-  display: flex; align-items: center; justify-content: center;
-  transition: all .2s;
-}
-.btn-close:hover { background: var(--grayL); color: var(--ink); }
-.modal-body { flex: 1; overflow: hidden; }
-.modal-body iframe { width: 100%; height: 100%; border: none; border-radius: 0 0 var(--r) var(--r); }
-.modal-loading {
-  height: 100%; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 12px; color: var(--gray);
-}
-.modal-loading .spin2 {
-  width: 36px; height: 36px; border: 3px solid var(--grayL);
-  border-top-color: var(--moss); border-radius: 50%;
-  animation: sp2 .8s linear infinite;
-}
-@keyframes sp2 { to { transform: rotate(360deg); } }
-
-/* ── REVISI KONFIRMASI ── */
-#revisiModal {
-  position: fixed; inset: 0; z-index: 600;
-  background: rgba(26,61,43,.65); backdrop-filter: blur(6px);
-  display: none; align-items: center; justify-content: center; padding: 20px;
-}
-#revisiModal.open { display: flex; }
-.rm-box {
-  background: var(--white); border-radius: var(--r);
-  width: 100%; max-width: 460px; padding: 32px;
-  box-shadow: 0 24px 64px rgba(0,0,0,.3);
-  animation: mIn .3s ease;
-}
-.rm-icon { font-size: 40px; margin-bottom: 16px; }
-.rm-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
-.rm-body  { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 24px; }
-.rm-sop   { background: var(--mist); border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; font-size: 13px; color: var(--forest); font-weight: 600; border-left: 3px solid var(--moss); }
-.rm-info  { background: var(--goldL); border-radius: 8px; padding: 12px 14px; margin-bottom: 24px; font-size: 12px; color: #6B4A00; line-height: 1.6; }
-.rm-btns  { display: flex; gap: 10px; }
-.rm-cancel {
-  flex: 1; padding: 11px; border: 1.5px solid var(--grayL);
-  background: none; border-radius: 8px; cursor: pointer;
-  font-size: 13px; font-weight: 600; color: var(--gray);
-  font-family: 'DM Sans', sans-serif; transition: all .2s;
-}
-.rm-cancel:hover { border-color: var(--moss); color: var(--leaf); }
-.rm-confirm {
-  flex: 2; padding: 11px;
-  background: var(--forest); color: var(--cream);
-  border: none; border-radius: 8px; cursor: pointer;
-  font-size: 13px; font-weight: 600;
-  font-family: 'DM Sans', sans-serif; transition: all .2s;
-}
-.rm-confirm:hover { background: var(--leaf); }
-
-/* ── RIWAYAT ── */
-.riwayat-section { margin-top: 8px; }
-.rv-card {
-  background: var(--white); border: 1px solid var(--grayL);
-  border-radius: var(--r); padding: 18px 22px;
-  margin-bottom: 12px; box-shadow: var(--sh);
-  display: flex; align-items: flex-start; gap: 14px;
-}
-.rv-ico  { font-size: 22px; flex-shrink: 0; }
-.rv-kode { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--moss); margin-bottom: 3px; }
-.rv-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
-.rv-meta { font-size: 12px; color: var(--gray); }
-.rv-sp   { flex: 1; }
-.rv-bdg  { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
-.bdg-m   { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
-.bdg-s   { background: var(--mist); color: var(--forest); border: 1px solid var(--sage); }
-.bdg-t   { background: #FFEBEE; color: #C62828; border: 1px solid #FFCDD2; }
-
-.empty { text-align: center; padding: 40px; color: var(--gray); }
-.empty .ei { font-size: 36px; margin-bottom: 8px; }
-
-@media (max-width: 768px) {
-  #main { padding: 20px 16px; }
-  .hero { padding: 24px 20px; }
-  .sop-grid { grid-template-columns: 1fr; }
-  .modal-box { height: 95vh; }
-}
+:root{--forest:#1A3D2B;--leaf:#2D6A4F;--moss:#40916C;--sage:#74C69D;--mist:#D8F3DC;--cream:#F8F5EF;--gold:#C9A84C;--goldL:#F5E6C0;--ink:#1C2B1E;--gray:#6B7F6E;--grayL:#E8EDE9;--white:#FFFFFF;--bg:#F2F5F2;--red:#C62828;--redL:#FFEBEE;--r:16px;--rSm:10px;--sh:0 2px 16px rgba(26,61,43,.08);--shLg:0 8px 32px rgba(26,61,43,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+#topbar{background:var(--forest);height:58px;padding:0 28px;position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:14px;box-shadow:0 2px 20px rgba(0,0,0,.2)}
+.t-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.t-ring{width:34px;height:34px;border-radius:8px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:16px}
+.t-name{font-family:'Fraunces',serif;font-weight:600;color:var(--cream);font-size:15px}
+.t-sub{font-size:10px;color:rgba(116,198,157,.55);font-family:'DM Mono',monospace;letter-spacing:.05em}
+.t-sp{flex:1}
+.t-user{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:5px 14px;color:var(--sage);font-size:12px;font-weight:500}
+.t-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:var(--cream);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;transition:background .2s}
+.t-btn:hover{background:rgba(255,255,255,.2)}
+#main{max-width:1200px;margin:0 auto;padding:40px 28px}
+.hero{background:linear-gradient(135deg,var(--forest) 0%,var(--leaf) 100%);border-radius:var(--r);padding:36px 40px;margin-bottom:36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:rgba(201,168,76,.08)}
+.hero-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--sage);text-transform:uppercase;margin-bottom:10px}
+.hero h2{font-family:'Fraunces',serif;font-size:28px;font-weight:400;color:var(--cream);margin-bottom:8px}
+.hero p{font-size:13px;color:rgba(216,243,220,.6);max-width:520px;line-height:1.7}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;margin-top:16px;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);color:var(--gold);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+.sec-title{font-family:'Fraunces',serif;font-size:20px;font-weight:400;color:var(--ink)}
+.sec-line{flex:1;height:1px;background:var(--grayL)}
+.sop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:48px}
+.sop-card{background:var(--white);border:1px solid var(--grayL);border-radius:var(--r);padding:22px;cursor:pointer;transition:all .25s;box-shadow:var(--sh);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.sop-card:hover{transform:translateY(-3px);box-shadow:var(--shLg);border-color:transparent}
+.sc-bar{width:4px;height:100%;position:absolute;top:0;left:0}
+.sc-top{display:flex;align-items:flex-start;gap:12px;padding-left:10px}
+.sc-ico{font-size:24px;flex-shrink:0}
+.sc-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.sc-name{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3}
+.sc-desc{font-size:12px;color:var(--gray);line-height:1.6;padding-left:10px;flex:1}
+.sc-foot{display:flex;align-items:center;justify-content:space-between;padding-left:10px;margin-top:auto}
+.sc-read{font-size:12px;font-weight:600}
+.sc-arr{font-size:18px;transition:transform .2s}
+.sop-card:hover .sc-arr{transform:translateX(4px)}
+/* Modal Baca */
+#modalBaca{position:fixed;inset:0;z-index:500;background:rgba(26,61,43,.65);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:16px}
+#modalBaca.open{display:flex}
+.mb-box{background:var(--white);border-radius:var(--r);width:100%;max-width:900px;height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3);animation:mIn .3s ease}
+@keyframes mIn{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:none}}
+.mb-header{padding:16px 22px;border-bottom:1px solid var(--grayL);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.mb-ico{font-size:20px}
+.mb-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;color:var(--gray);text-transform:uppercase}
+.mb-title{font-size:15px;font-weight:600;color:var(--ink)}
+.mb-sp{flex:1}
+.btn-ajukan{display:flex;align-items:center;gap:7px;background:var(--gold);color:var(--white);border:none;border-radius:8px;padding:9px 18px;cursor:pointer;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;transition:all .2s}
+.btn-ajukan:hover{background:#B8932A;transform:translateY(-1px)}
+.btn-close{width:34px;height:34px;border-radius:50%;border:1px solid var(--grayL);background:var(--bg);cursor:pointer;font-size:17px;color:var(--gray);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.btn-close:hover{background:var(--grayL);color:var(--ink)}
+.mb-body{flex:1;overflow:hidden}
+.mb-body iframe{width:100%;height:100%;border:none;border-radius:0 0 var(--r) var(--r)}
+.mb-loading{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--gray)}
+.spin{width:32px;height:32px;border:3px solid var(--grayL);border-top-color:var(--moss);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* Modal Revisi */
+#modalRevisi{position:fixed;inset:0;z-index:600;background:rgba(26,61,43,.75);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:12px}
+#modalRevisi.open{display:flex}
+.mr-box{background:var(--white);border-radius:var(--r);width:100%;max-width:1280px;height:95vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.35);animation:mIn .3s ease}
+.mr-header{padding:14px 22px;border-bottom:1px solid var(--grayL);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(--forest);border-radius:var(--r) var(--r) 0 0}
+.mr-header .mh-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;color:var(--sage);text-transform:uppercase}
+.mr-header .mh-title{font-size:14px;font-weight:600;color:var(--cream)}
+.mr-header .mh-sp{flex:1}
+.mr-header .btn-close{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:var(--cream)}
+.mr-header .btn-close:hover{background:rgba(255,255,255,.2)}
+.mr-split{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0;border-bottom:1px solid var(--grayL)}
+.split-pane{display:flex;flex-direction:column;min-height:0}
+.split-pane.left{border-right:1px solid var(--grayL)}
+.split-label-bar{padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--grayL);flex-shrink:0}
+.split-label-bar.old{background:#F8FFFE;color:var(--moss)}
+.split-label-bar.edit{background:#FFFBF0;color:#8B6914}
+.split-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.split-dot.grn{background:var(--moss)}
+.split-dot.gld{background:var(--gold)}
+.split-iframe{flex:1;border:none;min-height:0}
+.split-loading{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--gray);font-size:13px}
+.google-hint{background:var(--goldL);border-top:1px solid rgba(201,168,76,.3);padding:9px 16px;font-size:12px;color:#6B4A00;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mr-form{padding:16px 22px;background:var(--bg);flex-shrink:0;border-top:2px solid var(--grayL)}
+.mr-form-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--leaf);margin-bottom:5px}
+.field input,.field textarea,.field select{width:100%;padding:9px 12px;border:1.5px solid var(--grayL);border-radius:var(--rSm);font-size:13px;font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--moss);box-shadow:0 0 0 3px rgba(64,145,108,.1)}
+.field textarea{resize:none;height:56px;line-height:1.5}
+.form-btns{display:flex;align-items:center;gap:12px;justify-content:flex-end;margin-top:12px}
+.btn-batal{padding:9px 18px;background:transparent;border:1.5px solid var(--grayL);border-radius:var(--rSm);font-size:13px;font-weight:600;color:var(--gray);font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
+.btn-batal:hover{border-color:var(--moss);color:var(--leaf)}
+.btn-kirim{padding:9px 22px;background:var(--forest);color:var(--cream);border:none;border-radius:var(--rSm);font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px}
+.btn-kirim:hover{background:var(--leaf);transform:translateY(-1px)}
+.btn-kirim:disabled{opacity:.6;transform:none;cursor:not-allowed}
+/* Riwayat */
+.rv-card{background:var(--white);border:1px solid var(--grayL);border-radius:var(--r);padding:20px 22px;margin-bottom:12px;box-shadow:var(--sh)}
+.rv-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.rv-ico{font-size:22px;flex-shrink:0;margin-top:2px}
+.rv-info{flex:1}
+.rv-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.rv-name{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.rv-meta{font-size:12px;color:var(--gray)}
+.rv-sp{flex:1}
+.bdg{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.bdg-m{background:#FFF3E0;color:#E65100;border:1px solid #FFCC80}
+.bdg-s{background:var(--mist);color:var(--forest);border:1px solid var(--sage)}
+.bdg-t{background:var(--redL);color:var(--red);border:1px solid #FFCDD2}
+.rv-alasan{font-size:12px;color:var(--gray);padding:10px 14px;background:var(--bg);border-radius:8px;line-height:1.6;margin-bottom:12px}
+.rv-result-box{border-radius:var(--rSm);padding:14px 16px;border-left:4px solid;font-size:13px;line-height:1.7;margin-bottom:10px}
+.rv-result-box.ok{background:var(--mist);border-color:var(--moss);color:var(--forest)}
+.rv-result-box.err{background:var(--redL);border-color:var(--red);color:var(--red)}
+.rv-result-box strong{display:block;font-size:14px;margin-bottom:4px}
+.rv-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.rv-link{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all .2s}
+.rv-link.new-ver{background:var(--forest);color:var(--cream)}
+.rv-link.new-ver:hover{background:var(--leaf)}
+.rv-link.old-ver{background:var(--white);color:var(--gray);border:1px solid var(--grayL)}
+.rv-link.old-ver:hover{border-color:var(--moss);color:var(--leaf)}
+.empty{text-align:center;padding:40px;color:var(--gray)}
+.empty .ei{font-size:36px;margin-bottom:8px}
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;padding:14px 20px;border-radius:var(--rSm);font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);display:none;animation:ti .3s ease}
+.toast.ok{background:var(--forest);color:var(--cream)}
+.toast.err{background:var(--red);color:#fff}
+@keyframes ti{from{transform:translateX(80px);opacity:0}to{transform:none;opacity:1}}
+@media(max-width:768px){#main{padding:16px}.hero{padding:24px 20px}.sop-grid{grid-template-columns:1fr}.mr-split{grid-template-columns:1fr}.split-pane.left{border-right:none;border-bottom:1px solid var(--grayL);height:280px}.form-row{grid-template-columns:1fr}.mr-box{height:98vh}}
 </style>
 </head>
 <body>
-
-<!-- TOPBAR -->
 <div id="topbar">
-  <a class="t-logo" href="index.html">
-    <div class="t-ring">♻</div>
-    <div>
-      <div class="t-name">SOP TPS3R Elektronik</div>
-      <div class="t-sub">DINAS PRKCK · JAWA TIMUR</div>
-    </div>
-  </a>
+  <a class="t-logo" href="index.html"><div class="t-ring">♻</div><div><div class="t-name">SOP TPS3R Elektronik</div><div class="t-sub">DINAS PRKCK · JAWA TIMUR</div></div></a>
   <div class="t-sp"></div>
   <div class="t-user" id="userBadge">🌿 —</div>
   <button class="t-btn" onclick="doLogout()">Keluar</button>
 </div>
-
-<!-- MAIN -->
 <div id="main">
-
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-eye">Portal Pengelola & Petugas TPS3R</div>
     <h2>Standar Operasional Prosedur</h2>
-    <p>Pilih dokumen SOP di bawah untuk membuka dan membacanya langsung di browser. Jika ada prosedur yang perlu diperbarui, gunakan tombol <strong style="color:var(--gold)">Ajukan Revisi</strong> untuk mengirimkan usulan ke Dinas.</p>
+    <p>Pilih dokumen SOP untuk membuka dan membacanya langsung di browser. Jika ada prosedur yang perlu diperbarui, gunakan tombol <strong style="color:var(--gold)">Ajukan Revisi</strong> untuk mengirimkan usulan ke Dinas.</p>
     <div class="hero-tag">♻ Dinas PRKCK Provinsi Jawa Timur · Seksi Persampahan</div>
   </div>
-
-  <!-- SOP LIST -->
-  <div class="sec-head">
-    <div class="sec-title">Dokumen SOP Tersedia</div>
-    <div class="sec-line"></div>
-  </div>
+  <div class="sec-head"><div class="sec-title">Dokumen SOP Tersedia</div><div class="sec-line"></div></div>
   <div class="sop-grid" id="sopGrid"></div>
-
-  <!-- RIWAYAT REVISI -->
-  <div class="sec-head riwayat-section">
-    <div class="sec-title">Riwayat Pengajuan Revisi Saya</div>
-    <div class="sec-line"></div>
-  </div>
+  <div class="sec-head"><div class="sec-title">Riwayat Pengajuan Revisi</div><div class="sec-line"></div></div>
   <div id="riwayatList"></div>
-
 </div>
 
-<!-- MODAL VIEWER -->
-<div id="modal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div class="mh-ico" id="mIco">📄</div>
-      <div>
-        <div class="mh-label" id="mLabel">—</div>
-        <div class="mh-title" id="mTitle">—</div>
-      </div>
+<!-- MODAL BACA -->
+<div id="modalBaca">
+  <div class="mb-box">
+    <div class="mb-header">
+      <div class="mb-ico" id="mbIco">📄</div>
+      <div><div class="mb-label" id="mbLabel">—</div><div class="mb-title" id="mbTitle">—</div></div>
+      <div class="mb-sp"></div>
+      <button class="btn-ajukan" onclick="bukaRevisi()">✏️ Ajukan Revisi</button>
+      <button class="btn-close" onclick="tutupBaca()">✕</button>
+    </div>
+    <div class="mb-body" id="mbBody"><div class="mb-loading"><div class="spin"></div><span>Memuat dokumen…</span></div></div>
+  </div>
+</div>
+
+<!-- MODAL REVISI SPLIT VIEW -->
+<div id="modalRevisi">
+  <div class="mr-box">
+    <div class="mr-header">
+      <div style="font-size:18px" id="mrIco">✏️</div>
+      <div><div class="mh-label">Ajukan Revisi</div><div class="mh-title" id="mrTitle">—</div></div>
       <div class="mh-sp"></div>
-      <div class="modal-actions">
-        <button class="btn-revisi" onclick="bukaRevisiModal()">✏️ Ajukan Revisi</button>
-        <button class="btn-close" onclick="tutupModal()">✕</button>
+      <button class="btn-close" onclick="tutupRevisi()">✕</button>
+    </div>
+    <div class="mr-split">
+      <div class="split-pane left">
+        <div class="split-label-bar old"><span class="split-dot grn"></span>SOP Asli — Hanya Baca</div>
+        <div class="split-loading" id="loadOld"><div class="spin"></div><span>Memuat dokumen asli…</span></div>
+        <iframe id="iframeOld" class="split-iframe" style="display:none" onload="this.previousElementSibling.style.display='none';this.style.display='block'"></iframe>
+      </div>
+      <div class="split-pane">
+        <div class="split-label-bar edit"><span class="split-dot gld"></span>Dokumen Revisi — Edit di Sini</div>
+        <div class="google-hint">💡 Pastikan sudah login ke Google di browser ini. Klik <strong>"Make a copy"</strong> saat Google Docs meminta konfirmasi.</div>
+        <div class="split-loading" id="loadNew"><div class="spin"></div><span>Membuka salinan untuk diedit…</span></div>
+        <iframe id="iframeNew" class="split-iframe" style="display:none" onload="this.previousElementSibling.style.display='none';this.style.display='block'"></iframe>
       </div>
     </div>
-    <div class="modal-body" id="modalBody">
-      <div class="modal-loading" id="modalLoading">
-        <div class="spin2"></div>
-        <span>Memuat dokumen…</span>
+    <div class="mr-form">
+      <div class="mr-form-title">📤 Form Pengajuan Revisi</div>
+      <div class="form-row">
+        <div class="field"><label>Nama Lengkap</label><input type="text" id="fNama" placeholder="Nama pengelola / petugas"></div>
+        <div class="field"><label>Nama TPS3R</label>
+          <select id="fTPS3R">
+            <option value="">— Pilih TPS3R —</option>
+            <option>TPS3R Dadapejo, Junrejo, Kota Batu</option>
+            <option>TPS3R Purworejo, Senduro, Lumajang</option>
+            <option>TPS3R Burno, Senduro, Lumajang</option>
+            <option>TPS3R Sidorejo, Magetan</option>
+            <option>TPS3R Kepuhanyar, Mojoanyar, Mojokerto</option>
+            <option>TPS3R Bendomungal, Bangil, Pasuruan</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:10px"><label>Alasan / Justifikasi Perubahan</label><textarea id="fAlasan" placeholder="Jelaskan mengapa SOP ini perlu direvisi…"></textarea></div>
+      <div class="field" style="margin-bottom:0">
+        <label>Link Dokumen Revisi (setelah diedit di panel kanan)</label>
+        <input type="text" id="fLink" placeholder="Buka Google Docs di panel kanan → Share → Copy link → tempel di sini">
+        <div style="font-size:11px;color:var(--gray);margin-top:4px">💡 Di panel kanan, setelah selesai edit: klik <strong>Share → Copy link</strong> lalu tempel di kolom ini.</div>
+      </div>
+      <div class="form-btns">
+        <button class="btn-batal" onclick="tutupRevisi()">Batal</button>
+        <button class="btn-kirim" id="btnKirim" onclick="kirimRevisi()"><span>📤 Kirim ke Dinas</span></button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- MODAL KONFIRMASI REVISI -->
-<div id="revisiModal">
-  <div class="rm-box">
-    <div class="rm-icon">✏️</div>
-    <div class="rm-title">Ajukan Revisi SOP</div>
-    <div class="rm-body">Anda akan membuka dokumen SOP berikut di Google Docs untuk diedit:</div>
-    <div class="rm-sop" id="rmSopName">—</div>
-    <div class="rm-info">
-      📌 <strong>Petunjuk:</strong><br>
-      1. Dokumen akan terbuka di Google Docs dalam tab baru.<br>
-      2. Lakukan perubahan yang Anda usulkan langsung di dokumen.<br>
-      3. Simpan dokumen (Ctrl+S atau otomatis tersimpan).<br>
-      4. Kembali ke halaman ini — pengajuan Anda akan tercatat di riwayat di bawah.
-    </div>
-    <div class="rm-btns">
-      <button class="rm-cancel" onclick="tutupRevisiModal()">Batal</button>
-      <button class="rm-confirm" onclick="lanjutRevisi()">Buka di Google Docs →</button>
-    </div>
-  </div>
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ── AUTH ────────────────────────────────────────────────────
-const sesi = JSON.parse(sessionStorage.getItem('sop_user') || 'null');
-if (!sesi || sesi.role !== 'tps3r') window.location.href = 'index.html';
-else document.getElementById('userBadge').textContent = '🌿 ' + sesi.nama;
-function doLogout() { sessionStorage.clear(); window.location.href = 'index.html'; }
+const sesi = JSON.parse(sessionStorage.getItem('sop_user')||'null');
+if(!sesi||sesi.role!=='tps3r') window.location.href='index.html';
+else document.getElementById('userBadge').textContent='🌿 '+sesi.nama;
+function doLogout(){sessionStorage.clear();window.location.href='index.html';}
+function getRiwayat(){return JSON.parse(sessionStorage.getItem('sop_riwayat')||'[]')}
+function setRiwayat(d){sessionStorage.setItem('sop_riwayat',JSON.stringify(d))}
 
-// ── RIWAYAT (in-memory, shared via sessionStorage) ──────────
-function getRiwayat() {
-  return JSON.parse(sessionStorage.getItem('sop_riwayat') || '[]');
-}
-function simpanRiwayat(r) {
-  sessionStorage.setItem('sop_riwayat', JSON.stringify(r));
-}
-
-// ── RENDER SOP GRID ─────────────────────────────────────────
-const grid = document.getElementById('sopGrid');
-Object.entries(SOP_CONFIG).forEach(([key, sop]) => {
-  const card = document.createElement('div');
-  card.className = 'sop-card';
-  card.innerHTML = `
-    <div class="sc-bar" style="background:${sop.warna}"></div>
-    <div class="sc-top">
-      <div class="sc-ico">${sop.icon}</div>
-      <div>
-        <div class="sc-label" style="color:${sop.warna}">${sop.label}</div>
-        <div class="sc-name">${sop.label.split('—')[1]?.trim() || sop.label}</div>
-      </div>
-    </div>
+// Render grid
+const grid=document.getElementById('sopGrid');
+Object.entries(SOP_CONFIG).forEach(([key,sop])=>{
+  const c=document.createElement('div');
+  c.className='sop-card';
+  c.style.borderLeft=`4px solid ${sop.warna}`;
+  c.innerHTML=`<div class="sc-bar" style="background:${sop.warna}"></div>
+    <div class="sc-top"><div class="sc-ico">${sop.icon}</div>
+    <div><div class="sc-label" style="color:${sop.warna}">${sop.label}</div>
+    <div class="sc-name">${sop.label.split('—')[1]?.trim()||sop.label}</div></div></div>
     <div class="sc-desc">${sop.deskripsi}</div>
-    <div class="sc-foot">
-      <span class="sc-read">Buka & baca dokumen</span>
-      <span class="sc-arr">→</span>
-    </div>`;
-  card.style.borderLeft = `4px solid ${sop.warna}`;
-  card.onclick = () => bukaModal(key);
-  grid.appendChild(card);
+    <div class="sc-foot"><span class="sc-read" style="color:${sop.warna}">Buka & baca dokumen</span>
+    <span class="sc-arr" style="color:${sop.warna}">→</span></div>`;
+  c.onclick=()=>bukaBaca(key);
+  grid.appendChild(c);
 });
 
-// ── MODAL VIEWER ─────────────────────────────────────────────
-let currentKey = null;
+let currentKey=null;
+function bukaBaca(key){
+  currentKey=key;
+  const sop=SOP_CONFIG[key];
+  document.getElementById('mbIco').textContent=sop.icon;
+  document.getElementById('mbLabel').textContent=sop.label;
+  document.getElementById('mbTitle').textContent=sop.label.split('—')[1]?.trim()||sop.label;
+  document.getElementById('modalBaca').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('mbBody').innerHTML=`<div class="mb-loading"><div class="spin"></div><span>Memuat dokumen…</span></div>`;
+  setTimeout(()=>{document.getElementById('mbBody').innerHTML=`<iframe src="${sop.previewUrl}" style="width:100%;height:100%;border:none;border-radius:0 0 var(--r) var(--r)" allowfullscreen></iframe>`;},600);
+}
+function tutupBaca(){document.getElementById('modalBaca').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('modalBaca').addEventListener('click',function(e){if(e.target===this)tutupBaca();});
 
-function bukaModal(key) {
-  currentKey = key;
-  const sop = SOP_CONFIG[key];
-  document.getElementById('mIco').textContent   = sop.icon;
-  document.getElementById('mLabel').textContent = sop.label;
-  document.getElementById('mTitle').textContent = sop.label.split('—')[1]?.trim() || sop.label;
-  document.getElementById('modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+function bukaRevisi(){
+  if(!currentKey)return;
+  const sop=SOP_CONFIG[currentKey];
+  tutupBaca();
+  document.getElementById('mrIco').textContent=sop.icon;
+  document.getElementById('mrTitle').textContent=sop.label;
+  document.getElementById('modalRevisi').classList.add('open');
+  document.body.style.overflow='hidden';
+  ['fNama','fAlasan','fLink'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fTPS3R').value='';
+  const iOld=document.getElementById('iframeOld');
+  document.getElementById('loadOld').style.display='flex';
+  iOld.style.display='none';
+  iOld.src=sop.previewUrl;
+  const iNew=document.getElementById('iframeNew');
+  document.getElementById('loadNew').style.display='flex';
+  iNew.style.display='none';
+  iNew.src=sop.editUrl.replace('/edit','/copy');
+}
+function tutupRevisi(){
+  document.getElementById('modalRevisi').classList.remove('open');
+  document.body.style.overflow='';
+  document.getElementById('iframeOld').src='';
+  document.getElementById('iframeNew').src='';
+}
+document.getElementById('modalRevisi').addEventListener('click',function(e){if(e.target===this)tutupRevisi();});
 
-  const body = document.getElementById('modalBody');
-  body.innerHTML = `
-    <div class="modal-loading">
-      <div class="spin2"></div>
-      <span>Memuat dokumen…</span>
-    </div>`;
-
-  setTimeout(() => {
-    body.innerHTML = `<iframe src="${sop.previewUrl}" title="${sop.label}" allowfullscreen></iframe>`;
-  }, 800);
+function kirimRevisi(){
+  const nama=document.getElementById('fNama').value.trim();
+  const tps3r=document.getElementById('fTPS3R').value;
+  const alasan=document.getElementById('fAlasan').value.trim();
+  const link=document.getElementById('fLink').value.trim();
+  const sop=SOP_CONFIG[currentKey];
+  if(!nama)return showToast('Nama lengkap harus diisi.','err');
+  if(!tps3r)return showToast('Pilih nama TPS3R.','err');
+  if(!alasan)return showToast('Alasan revisi harus diisi.','err');
+  if(!link)return showToast('Link dokumen revisi harus diisi.','err');
+  if(!link.includes('google.com'))return showToast('Link harus berupa URL Google Docs.','err');
+  let prevUrl=link;
+  if(link.includes('/edit'))prevUrl=link.split('/edit')[0]+'/preview';
+  else if(link.includes('/view'))prevUrl=link.split('/view')[0]+'/preview';
+  else if(link.includes('/copy'))prevUrl=link.split('/copy')[0]+'/preview';
+  document.getElementById('btnKirim').disabled=true;
+  setTimeout(()=>{
+    const rv=getRiwayat();
+    rv.unshift({id:'rv_'+Date.now(),key:currentKey,label:sop.label,icon:sop.icon,warna:sop.warna,
+      waktu:new Date().toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'}),
+      nama,tps3r,alasan,linkRevisi:link,revisiPreviewUrl:prevUrl,urlAsli:sop.previewUrl,
+      status:'menunggu',catatan:null,reviewedAt:null});
+    setRiwayat(rv);
+    document.getElementById('btnKirim').disabled=false;
+    tutupRevisi();
+    showToast('✅ Pengajuan revisi berhasil dikirim ke Dinas!','ok');
+    renderRiwayat();
+  },700);
 }
 
-function tutupModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow = '';
-  currentKey = null;
-}
-
-// Klik backdrop untuk tutup
-document.getElementById('modal').addEventListener('click', function(e) {
-  if (e.target === this) tutupModal();
-});
-
-// ── MODAL REVISI ─────────────────────────────────────────────
-function bukaRevisiModal() {
-  if (!currentKey) return;
-  const sop = SOP_CONFIG[currentKey];
-  document.getElementById('rmSopName').textContent = sop.label;
-  document.getElementById('revisiModal').classList.add('open');
-}
-
-function tutupRevisiModal() {
-  document.getElementById('revisiModal').classList.remove('open');
-}
-
-function lanjutRevisi() {
-  const sop = SOP_CONFIG[currentKey];
-
-  // Catat ke riwayat
-  const riwayat = getRiwayat();
-  const entri = {
-    id:      'rv_' + Date.now(),
-    key:     currentKey,
-    label:   sop.label,
-    icon:    sop.icon,
-    waktu:   new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }),
-    status:  'menunggu',
-    catatan: null,
-  };
-  riwayat.unshift(entri);
-  simpanRiwayat(riwayat);
-
-  // Buka Google Docs untuk edit
-  window.open(sop.editUrl, '_blank');
-  tutupRevisiModal();
-  tutupModal();
-  renderRiwayat();
-}
-
-// ── RENDER RIWAYAT ───────────────────────────────────────────
-function renderRiwayat() {
-  const el   = document.getElementById('riwayatList');
-  const list = getRiwayat();
-  if (!list.length) {
-    el.innerHTML = `<div class="empty"><div class="ei">📭</div><p>Belum ada pengajuan revisi.</p></div>`;
-    return;
-  }
-  el.innerHTML = list.map(r => `
-    <div class="rv-card">
-      <div class="rv-ico">${r.icon}</div>
-      <div>
-        <div class="rv-kode">${r.key.toUpperCase()}</div>
+function renderRiwayat(){
+  const el=document.getElementById('riwayatList');
+  const list=getRiwayat();
+  if(!list.length){el.innerHTML=`<div class="empty"><div class="ei">📭</div><p>Belum ada pengajuan revisi.</p></div>`;return;}
+  el.innerHTML=list.map(r=>{
+    const bdg=r.status==='menunggu'?'<span class="bdg bdg-m">⏳ Menunggu Riviu</span>':r.status==='disetujui'?'<span class="bdg bdg-s">✅ Disetujui</span>':'<span class="bdg bdg-t">❌ Ditolak</span>';
+    let res='';
+    if(r.status==='disetujui'){
+      res=`<div class="rv-result-box ok"><strong>✅ Revisi Disetujui</strong>Revisi untuk <em>${r.label}</em> telah disetujui oleh Staf Dinas pada ${r.reviewedAt}.${r.catatan?`<br>💬 Catatan: "${r.catatan}"`:''}</div>
+        <div class="rv-links"><a class="rv-link new-ver" href="${r.revisiPreviewUrl}" target="_blank">🔗 Akses versi terbaru (revisi)</a><a class="rv-link old-ver" href="${r.urlAsli}" target="_blank">📄 Lihat versi lama (arsip)</a></div>`;
+    } else if(r.status==='ditolak'){
+      res=`<div class="rv-result-box err"><strong>❌ Revisi Ditolak</strong>Pengajuan untuk <em>${r.label}</em> ditolak pada ${r.reviewedAt}.${r.catatan?`<br>💬 Alasan: "${r.catatan}"`:''}</div>
+        <div class="rv-links"><a class="rv-link old-ver" href="${r.urlAsli}" target="_blank">📄 Lihat SOP yang berlaku</a></div>`;
+    }
+    return `<div class="rv-card">
+      <div class="rv-top"><div class="rv-ico">${r.icon}</div>
+        <div class="rv-info"><div class="rv-label" style="color:${r.warna||'var(--moss)'}">${r.key?.toUpperCase()}</div>
         <div class="rv-name">${r.label}</div>
-        <div class="rv-meta">🕐 ${r.waktu}</div>
-        ${r.catatan ? `<div style="margin-top:6px;font-size:12px;color:var(--gray)">💬 ${r.catatan}</div>` : ''}
-      </div>
-      <div class="rv-sp"></div>
-      <span class="rv-bdg ${r.status === 'menunggu' ? 'bdg-m' : r.status === 'disetujui' ? 'bdg-s' : 'bdg-t'}">
-        ${r.status === 'menunggu' ? '⏳ Menunggu Riviu' : r.status === 'disetujui' ? '✅ Disetujui' : '❌ Ditolak'}
-      </span>
-    </div>`).join('');
+        <div class="rv-meta">🕐 ${r.waktu} · 👤 ${r.nama} · 🌿 ${r.tps3r}</div></div>
+        <div class="rv-sp"></div>${bdg}</div>
+      <div class="rv-alasan"><strong>Alasan:</strong> ${r.alasan}</div>
+      ${res}</div>`;
+  }).join('');
 }
-
+function showToast(msg,type){const el=document.getElementById('toast');el.className='toast '+type;el.textContent=msg;el.style.display='flex';setTimeout(()=>el.style.display='none',3500);}
 renderRiwayat();
+setInterval(renderRiwayat,5000);
 </script>
 </body>
 </html>
