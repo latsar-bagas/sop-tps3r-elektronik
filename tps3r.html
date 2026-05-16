@@ -274,8 +274,8 @@ const sesi=JSON.parse(sessionStorage.getItem('sop_user')||'null');
 if(!sesi||sesi.role!=='tps3r') window.location.href='index.html';
 else document.getElementById('userBadge').textContent='🌿 '+sesi.nama;
 function doLogout(){sessionStorage.clear();window.location.href='index.html';}
-function getRiwayat(){return JSON.parse(sessionStorage.getItem('sop_riwayat')||'[]')}
-function setRiwayat(d){sessionStorage.setItem('sop_riwayat',JSON.stringify(d))}
+function getRiwayat(){return JSON.parse(localStorage.getItem('sop_riwayat')||'[]')}
+function setRiwayat(d){localStorage.setItem('sop_riwayat',JSON.stringify(d))}
 
 // ── RENDER GRID ──────────────────────────────────────────────
 const grid=document.getElementById('sopGrid');

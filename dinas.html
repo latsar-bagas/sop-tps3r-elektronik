@@ -142,8 +142,8 @@ const sesi=JSON.parse(sessionStorage.getItem('sop_user')||'null');
 if(!sesi||sesi.role!=='dinas') window.location.href='index.html';
 else document.getElementById('userBadge').textContent='🏛️ '+sesi.nama;
 function doLogout(){sessionStorage.clear();window.location.href='index.html';}
-function getData(){return JSON.parse(sessionStorage.getItem('sop_riwayat')||'[]')}
-function saveData(d){sessionStorage.setItem('sop_riwayat',JSON.stringify(d))}
+function getData(){return JSON.parse(localStorage.getItem('sop_riwayat')||'[]')}
+function saveData(d){localStorage.setItem('sop_riwayat',JSON.stringify(d))}
 
 let filterStatus='semua', openId=null;
 
