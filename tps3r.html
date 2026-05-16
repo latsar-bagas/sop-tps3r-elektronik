@@ -42,10 +42,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .sc-read{font-size:12px;font-weight:600}
 .sc-arr{font-size:18px;transition:transform .2s}
 .sop-card:hover .sc-arr{transform:translateX(4px)}
-/* Modal Baca */
+
+/* ── MODAL BACA ── */
 #modalBaca{position:fixed;inset:0;z-index:500;background:rgba(26,61,43,.65);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:16px}
 #modalBaca.open{display:flex}
-.mb-box{background:var(--white);border-radius:var(--r);width:100%;max-width:900px;height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3);animation:mIn .3s ease}
+.mb-box{background:var(--white);border-radius:var(--r);width:100%;max-width:960px;height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3);animation:mIn .3s ease}
 @keyframes mIn{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:none}}
 .mb-header{padding:16px 22px;border-bottom:1px solid var(--grayL);display:flex;align-items:center;gap:12px;flex-shrink:0}
 .mb-ico{font-size:20px}
@@ -61,42 +62,64 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .mb-loading{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--gray)}
 .spin{width:32px;height:32px;border:3px solid var(--grayL);border-top-color:var(--moss);border-radius:50%;animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-/* Modal Revisi */
-#modalRevisi{position:fixed;inset:0;z-index:600;background:rgba(26,61,43,.75);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:12px}
+
+/* ── MODAL REVISI ── */
+#modalRevisi{position:fixed;inset:0;z-index:600;background:rgba(26,61,43,.75);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px}
 #modalRevisi.open{display:flex}
-.mr-box{background:var(--white);border-radius:var(--r);width:100%;max-width:1280px;height:95vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.35);animation:mIn .3s ease}
-.mr-header{padding:14px 22px;border-bottom:1px solid var(--grayL);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(--forest);border-radius:var(--r) var(--r) 0 0}
-.mr-header .mh-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;color:var(--sage);text-transform:uppercase}
-.mr-header .mh-title{font-size:14px;font-weight:600;color:var(--cream)}
+.mr-box{background:var(--white);border-radius:var(--r);width:100%;max-width:680px;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.35);animation:mIn .3s ease;overflow:hidden}
+.mr-header{padding:20px 24px;display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(--forest)}
+.mr-header .mh-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--sage);text-transform:uppercase;margin-bottom:3px}
+.mr-header .mh-title{font-size:15px;font-weight:600;color:var(--cream)}
 .mr-header .mh-sp{flex:1}
 .mr-header .btn-close{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:var(--cream)}
 .mr-header .btn-close:hover{background:rgba(255,255,255,.2)}
-.mr-split{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0;border-bottom:1px solid var(--grayL)}
-.split-pane{display:flex;flex-direction:column;min-height:0}
-.split-pane.left{border-right:1px solid var(--grayL)}
-.split-label-bar{padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--grayL);flex-shrink:0}
-.split-label-bar.old{background:#F8FFFE;color:var(--moss)}
-.split-label-bar.edit{background:#FFFBF0;color:#8B6914}
-.split-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.split-dot.grn{background:var(--moss)}
-.split-dot.gld{background:var(--gold)}
-.split-iframe{flex:1;border:none;min-height:0}
-.split-loading{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--gray);font-size:13px}
-.google-hint{background:var(--goldL);border-top:1px solid rgba(201,168,76,.3);padding:9px 16px;font-size:12px;color:#6B4A00;display:flex;align-items:center;gap:8px;flex-shrink:0}
-.mr-form{padding:16px 22px;background:var(--bg);flex-shrink:0;border-top:2px solid var(--grayL)}
-.mr-form-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--leaf);margin-bottom:5px}
-.field input,.field textarea,.field select{width:100%;padding:9px 12px;border:1.5px solid var(--grayL);border-radius:var(--rSm);font-size:13px;font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);outline:none;transition:border-color .2s}
+
+/* Step indicator */
+.mr-steps{display:flex;padding:0;border-bottom:1px solid var(--grayL)}
+.step-item{flex:1;padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray);border-bottom:3px solid transparent;transition:all .2s}
+.step-item.on{color:var(--forest);border-bottom-color:var(--forest);font-weight:700}
+.step-item.done{color:var(--moss);border-bottom-color:var(--moss)}
+.step-num{width:24px;height:24px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.step-item.done .step-num{background:var(--moss);border-color:var(--moss);color:#fff}
+
+/* Steps content */
+.mr-body{padding:24px}
+
+/* Step 1 */
+.step1-card{background:var(--mist);border-radius:var(--rSm);padding:20px;margin-bottom:16px;border:1px solid rgba(64,145,108,.2)}
+.step1-card .s1-title{font-size:14px;font-weight:700;color:var(--forest);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.step1-card .s1-body{font-size:13px;color:var(--leaf);line-height:1.7}
+.step1-card .s1-body ol{padding-left:18px;margin-top:8px}
+.step1-card .s1-body li{margin-bottom:6px}
+.step1-card .s1-body code{background:rgba(26,61,43,.1);padding:2px 7px;border-radius:4px;font-family:'DM Mono',monospace;font-size:12px;color:var(--forest)}
+.btn-buka-docs{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:var(--forest);color:var(--cream);border:none;border-radius:var(--rSm);font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;text-decoration:none;margin-top:16px}
+.btn-buka-docs:hover{background:var(--leaf);transform:translateY(-1px)}
+
+/* Step 2 */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--leaf);margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;padding:11px 14px;border:1.5px solid var(--grayL);border-radius:var(--rSm);font-size:13px;font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);outline:none;transition:border-color .2s}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--moss);box-shadow:0 0 0 3px rgba(64,145,108,.1)}
-.field textarea{resize:none;height:56px;line-height:1.5}
-.form-btns{display:flex;align-items:center;gap:12px;justify-content:flex-end;margin-top:12px}
-.btn-batal{padding:9px 18px;background:transparent;border:1.5px solid var(--grayL);border-radius:var(--rSm);font-size:13px;font-weight:600;color:var(--gray);font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
-.btn-batal:hover{border-color:var(--moss);color:var(--leaf)}
-.btn-kirim{padding:9px 22px;background:var(--forest);color:var(--cream);border:none;border-radius:var(--rSm);font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px}
+.field textarea{resize:none;height:72px;line-height:1.6}
+.field .hint{font-size:11px;color:var(--gray);margin-top:5px;line-height:1.5}
+.field .hint strong{color:var(--forest)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.link-field-wrap{position:relative}
+.link-field-wrap input{padding-right:80px}
+.link-paste-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--forest);color:var(--cream);border:none;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.link-paste-btn:hover{background:var(--leaf)}
+.link-status{margin-top:6px;font-size:12px;display:none;align-items:center;gap:6px}
+.link-status.ok{color:var(--moss);display:flex}
+.link-status.err{color:var(--red);display:flex}
+
+.form-btns{display:flex;gap:10px;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--grayL)}
+.btn-back{padding:10px 18px;background:transparent;border:1.5px solid var(--grayL);border-radius:var(--rSm);font-size:13px;font-weight:600;color:var(--gray);font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
+.btn-back:hover{border-color:var(--moss);color:var(--leaf)}
+.btn-kirim{padding:10px 24px;background:var(--forest);color:var(--cream);border:none;border-radius:var(--rSm);font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px}
 .btn-kirim:hover{background:var(--leaf);transform:translateY(-1px)}
 .btn-kirim:disabled{opacity:.6;transform:none;cursor:not-allowed}
-/* Riwayat */
+
+/* ── RIWAYAT ── */
 .rv-card{background:var(--white);border:1px solid var(--grayL);border-radius:var(--r);padding:20px 22px;margin-bottom:12px;box-shadow:var(--sh)}
 .rv-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
 .rv-ico{font-size:22px;flex-shrink:0;margin-top:2px}
@@ -126,7 +149,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .toast.ok{background:var(--forest);color:var(--cream)}
 .toast.err{background:var(--red);color:#fff}
 @keyframes ti{from{transform:translateX(80px);opacity:0}to{transform:none;opacity:1}}
-@media(max-width:768px){#main{padding:16px}.hero{padding:24px 20px}.sop-grid{grid-template-columns:1fr}.mr-split{grid-template-columns:1fr}.split-pane.left{border-right:none;border-bottom:1px solid var(--grayL);height:280px}.form-row{grid-template-columns:1fr}.mr-box{height:98vh}}
+@media(max-width:768px){#main{padding:16px}.hero{padding:24px 20px}.sop-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.mr-box{max-width:100%}}
 </style>
 </head>
 <body>
@@ -149,7 +172,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
   <div id="riwayatList"></div>
 </div>
 
-<!-- MODAL BACA -->
+<!-- MODAL BACA SOP -->
 <div id="modalBaca">
   <div class="mb-box">
     <div class="mb-header">
@@ -159,35 +182,56 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       <button class="btn-ajukan" onclick="bukaRevisi()">✏️ Ajukan Revisi</button>
       <button class="btn-close" onclick="tutupBaca()">✕</button>
     </div>
-    <div class="mb-body" id="mbBody"><div class="mb-loading"><div class="spin"></div><span>Memuat dokumen…</span></div></div>
+    <div class="mb-body" id="mbBody">
+      <div class="mb-loading"><div class="spin"></div><span>Memuat dokumen…</span></div>
+    </div>
   </div>
 </div>
 
-<!-- MODAL REVISI SPLIT VIEW -->
+<!-- MODAL REVISI — 2 LANGKAH -->
 <div id="modalRevisi">
   <div class="mr-box">
+    <!-- Header -->
     <div class="mr-header">
-      <div style="font-size:18px" id="mrIco">✏️</div>
-      <div><div class="mh-label">Ajukan Revisi</div><div class="mh-title" id="mrTitle">—</div></div>
+      <div>
+        <div class="mh-eye">Pengajuan Revisi SOP</div>
+        <div class="mh-title" id="mrTitle">—</div>
+      </div>
       <div class="mh-sp"></div>
       <button class="btn-close" onclick="tutupRevisi()">✕</button>
     </div>
-    <div class="mr-split">
-      <div class="split-pane left">
-        <div class="split-label-bar old"><span class="split-dot grn"></span>SOP Asli — Hanya Baca</div>
-        <div class="split-loading" id="loadOld"><div class="spin"></div><span>Memuat dokumen asli…</span></div>
-        <iframe id="iframeOld" class="split-iframe" style="display:none" onload="this.previousElementSibling.style.display='none';this.style.display='block'"></iframe>
+
+    <!-- Steps -->
+    <div class="mr-steps">
+      <div class="step-item on" id="stp1"><div class="step-num">1</div>Edit Dokumen</div>
+      <div class="step-item" id="stp2"><div class="step-num">2</div>Isi Form & Kirim</div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="mr-body" id="bodyStep1">
+      <div class="step1-card">
+        <div class="s1-title">📝 Cara mengajukan revisi:</div>
+        <div class="s1-body">
+          <ol>
+            <li>Klik tombol di bawah — Google Docs akan terbuka di <strong>tab baru</strong></li>
+            <li>Google Docs akan meminta konfirmasi <code>Make a copy</code> — klik <strong>OK</strong></li>
+            <li>Salinan dokumen terbuat di Google Drive Anda — edit sesuai kebutuhan</li>
+            <li>Setelah selesai edit, klik <strong>Share → Copy link</strong> di Google Docs</li>
+            <li>Kembali ke tab ini, klik <strong>Lanjut →</strong> untuk mengisi form pengajuan</li>
+          </ol>
+        </div>
+        <button class="btn-buka-docs" id="btnBukaDocs" onclick="bukaDocs()">
+          🔗 Buka Dokumen di Google Docs (Tab Baru)
+        </button>
       </div>
-      <div class="split-pane">
-        <div class="split-label-bar edit"><span class="split-dot gld"></span>Dokumen Revisi — Edit di Sini</div>
-        <div class="google-hint">💡 Pastikan sudah login ke Google di browser ini. Klik <strong>"Make a copy"</strong> saat Google Docs meminta konfirmasi.</div>
-        <div class="split-loading" id="loadNew"><div class="spin"></div><span>Membuka salinan untuk diedit…</span></div>
-        <iframe id="iframeNew" class="split-iframe" style="display:none" onload="this.previousElementSibling.style.display='none';this.style.display='block'"></iframe>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px">
+        <button class="btn-kirim" onclick="keStep2()">Saya sudah selesai edit → Lanjut →</button>
       </div>
     </div>
-    <div class="mr-form">
-      <div class="mr-form-title">📤 Form Pengajuan Revisi</div>
-      <div class="form-row">
+
+    <!-- STEP 2 -->
+    <div class="mr-body" id="bodyStep2" style="display:none">
+      <div class="form-row" style="margin-bottom:14px">
         <div class="field"><label>Nama Lengkap</label><input type="text" id="fNama" placeholder="Nama pengelola / petugas"></div>
         <div class="field"><label>Nama TPS3R</label>
           <select id="fTPS3R">
@@ -201,30 +245,39 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
           </select>
         </div>
       </div>
-      <div class="field" style="margin-bottom:10px"><label>Alasan / Justifikasi Perubahan</label><textarea id="fAlasan" placeholder="Jelaskan mengapa SOP ini perlu direvisi…"></textarea></div>
-      <div class="field" style="margin-bottom:0">
-        <label>Link Dokumen Revisi (setelah diedit di panel kanan)</label>
-        <input type="text" id="fLink" placeholder="Buka Google Docs di panel kanan → Share → Copy link → tempel di sini">
-        <div style="font-size:11px;color:var(--gray);margin-top:4px">💡 Di panel kanan, setelah selesai edit: klik <strong>Share → Copy link</strong> lalu tempel di kolom ini.</div>
+      <div class="field">
+        <label>Alasan / Justifikasi Perubahan</label>
+        <textarea id="fAlasan" placeholder="Jelaskan mengapa SOP ini perlu direvisi. Sertakan referensi atau pengalaman lapangan jika ada…"></textarea>
+      </div>
+      <div class="field">
+        <label>Link Dokumen Revisi (Google Docs)</label>
+        <div class="link-field-wrap">
+          <input type="text" id="fLink" placeholder="Tempel link Google Docs salinan yang sudah diedit…" oninput="cekLink()">
+          <button class="link-paste-btn" onclick="pasteLink()">📋 Tempel</button>
+        </div>
+        <div class="hint">💡 Di Google Docs yang sudah diedit: klik <strong>Share</strong> → <strong>Copy link</strong> → tempel di sini</div>
+        <div class="link-status ok" id="linkOk">✅ Link Google Docs valid</div>
+        <div class="link-status err" id="linkErr">❌ Pastikan link berasal dari Google Docs / Google Drive</div>
       </div>
       <div class="form-btns">
-        <button class="btn-batal" onclick="tutupRevisi()">Batal</button>
-        <button class="btn-kirim" id="btnKirim" onclick="kirimRevisi()"><span>📤 Kirim ke Dinas</span></button>
+        <button class="btn-back" onclick="keStep1()">← Kembali</button>
+        <button class="btn-kirim" id="btnKirim" onclick="kirimRevisi()">📤 Kirim ke Dinas</button>
       </div>
     </div>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-const sesi = JSON.parse(sessionStorage.getItem('sop_user')||'null');
+const sesi=JSON.parse(sessionStorage.getItem('sop_user')||'null');
 if(!sesi||sesi.role!=='tps3r') window.location.href='index.html';
 else document.getElementById('userBadge').textContent='🌿 '+sesi.nama;
 function doLogout(){sessionStorage.clear();window.location.href='index.html';}
 function getRiwayat(){return JSON.parse(sessionStorage.getItem('sop_riwayat')||'[]')}
 function setRiwayat(d){sessionStorage.setItem('sop_riwayat',JSON.stringify(d))}
 
-// Render grid
+// ── RENDER GRID ──────────────────────────────────────────────
 const grid=document.getElementById('sopGrid');
 Object.entries(SOP_CONFIG).forEach(([key,sop])=>{
   const c=document.createElement('div');
@@ -241,6 +294,7 @@ Object.entries(SOP_CONFIG).forEach(([key,sop])=>{
   grid.appendChild(c);
 });
 
+// ── MODAL BACA ───────────────────────────────────────────────
 let currentKey=null;
 function bukaBaca(key){
   currentKey=key;
@@ -251,38 +305,71 @@ function bukaBaca(key){
   document.getElementById('modalBaca').classList.add('open');
   document.body.style.overflow='hidden';
   document.getElementById('mbBody').innerHTML=`<div class="mb-loading"><div class="spin"></div><span>Memuat dokumen…</span></div>`;
-  setTimeout(()=>{document.getElementById('mbBody').innerHTML=`<iframe src="${sop.previewUrl}" style="width:100%;height:100%;border:none;border-radius:0 0 var(--r) var(--r)" allowfullscreen></iframe>`;},600);
+  setTimeout(()=>{
+    document.getElementById('mbBody').innerHTML=`<iframe src="${sop.previewUrl}" style="width:100%;height:100%;border:none;border-radius:0 0 var(--r) var(--r)" allowfullscreen></iframe>`;
+  },600);
 }
 function tutupBaca(){document.getElementById('modalBaca').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('modalBaca').addEventListener('click',function(e){if(e.target===this)tutupBaca();});
 
+// ── MODAL REVISI ─────────────────────────────────────────────
 function bukaRevisi(){
   if(!currentKey)return;
-  const sop=SOP_CONFIG[currentKey];
   tutupBaca();
-  document.getElementById('mrIco').textContent=sop.icon;
+  const sop=SOP_CONFIG[currentKey];
   document.getElementById('mrTitle').textContent=sop.label;
-  document.getElementById('modalRevisi').classList.add('open');
-  document.body.style.overflow='hidden';
+  // Set link buka docs
+  document.getElementById('btnBukaDocs').dataset.copyUrl=sop.editUrl.replace('/edit','/copy');
+  // Reset semua
   ['fNama','fAlasan','fLink'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('fTPS3R').value='';
-  const iOld=document.getElementById('iframeOld');
-  document.getElementById('loadOld').style.display='flex';
-  iOld.style.display='none';
-  iOld.src=sop.previewUrl;
-  const iNew=document.getElementById('iframeNew');
-  document.getElementById('loadNew').style.display='flex';
-  iNew.style.display='none';
-  iNew.src=sop.editUrl.replace('/edit','/copy');
+  document.getElementById('linkOk').style.display='none';
+  document.getElementById('linkErr').style.display='none';
+  keStep1();
+  document.getElementById('modalRevisi').classList.add('open');
+  document.body.style.overflow='hidden';
 }
-function tutupRevisi(){
-  document.getElementById('modalRevisi').classList.remove('open');
-  document.body.style.overflow='';
-  document.getElementById('iframeOld').src='';
-  document.getElementById('iframeNew').src='';
-}
+function tutupRevisi(){document.getElementById('modalRevisi').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('modalRevisi').addEventListener('click',function(e){if(e.target===this)tutupRevisi();});
 
+function bukaDocs(){
+  const url=document.getElementById('btnBukaDocs').dataset.copyUrl;
+  window.open(url,'_blank');
+}
+
+function keStep1(){
+  document.getElementById('bodyStep1').style.display='block';
+  document.getElementById('bodyStep2').style.display='none';
+  document.getElementById('stp1').className='step-item on';
+  document.getElementById('stp2').className='step-item';
+}
+function keStep2(){
+  document.getElementById('bodyStep1').style.display='none';
+  document.getElementById('bodyStep2').style.display='block';
+  document.getElementById('stp1').className='step-item done';
+  document.getElementById('stp2').className='step-item on';
+}
+
+// Validasi link
+function cekLink(){
+  const v=document.getElementById('fLink').value.trim();
+  const ok=document.getElementById('linkOk');
+  const err=document.getElementById('linkErr');
+  if(!v){ok.style.display='none';err.style.display='none';return;}
+  if(v.includes('google.com')){ok.style.display='flex';err.style.display='none';}
+  else{ok.style.display='none';err.style.display='flex';}
+}
+async function pasteLink(){
+  try{
+    const t=await navigator.clipboard.readText();
+    document.getElementById('fLink').value=t;
+    cekLink();
+  } catch(e){
+    showToast('Klik di dalam kotak link lalu tekan Ctrl+V','err');
+  }
+}
+
+// ── KIRIM ────────────────────────────────────────────────────
 function kirimRevisi(){
   const nama=document.getElementById('fNama').value.trim();
   const tps3r=document.getElementById('fTPS3R').value;
@@ -313,6 +400,7 @@ function kirimRevisi(){
   },700);
 }
 
+// ── RIWAYAT ──────────────────────────────────────────────────
 function renderRiwayat(){
   const el=document.getElementById('riwayatList');
   const list=getRiwayat();
@@ -323,7 +411,7 @@ function renderRiwayat(){
     if(r.status==='disetujui'){
       res=`<div class="rv-result-box ok"><strong>✅ Revisi Disetujui</strong>Revisi untuk <em>${r.label}</em> telah disetujui oleh Staf Dinas pada ${r.reviewedAt}.${r.catatan?`<br>💬 Catatan: "${r.catatan}"`:''}</div>
         <div class="rv-links"><a class="rv-link new-ver" href="${r.revisiPreviewUrl}" target="_blank">🔗 Akses versi terbaru (revisi)</a><a class="rv-link old-ver" href="${r.urlAsli}" target="_blank">📄 Lihat versi lama (arsip)</a></div>`;
-    } else if(r.status==='ditolak'){
+    }else if(r.status==='ditolak'){
       res=`<div class="rv-result-box err"><strong>❌ Revisi Ditolak</strong>Pengajuan untuk <em>${r.label}</em> ditolak pada ${r.reviewedAt}.${r.catatan?`<br>💬 Alasan: "${r.catatan}"`:''}</div>
         <div class="rv-links"><a class="rv-link old-ver" href="${r.urlAsli}" target="_blank">📄 Lihat SOP yang berlaku</a></div>`;
     }
@@ -333,10 +421,10 @@ function renderRiwayat(){
         <div class="rv-name">${r.label}</div>
         <div class="rv-meta">🕐 ${r.waktu} · 👤 ${r.nama} · 🌿 ${r.tps3r}</div></div>
         <div class="rv-sp"></div>${bdg}</div>
-      <div class="rv-alasan"><strong>Alasan:</strong> ${r.alasan}</div>
-      ${res}</div>`;
+      <div class="rv-alasan"><strong>Alasan:</strong> ${r.alasan}</div>${res}</div>`;
   }).join('');
 }
+
 function showToast(msg,type){const el=document.getElementById('toast');el.className='toast '+type;el.textContent=msg;el.style.display='flex';setTimeout(()=>el.style.display='none',3500);}
 renderRiwayat();
 setInterval(renderRiwayat,5000);
